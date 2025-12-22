@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'includes/config.php';
 
 $basePath = '/loty';
@@ -11,6 +12,8 @@ if (str_starts_with($uri, $basePath)) {
 $uri = trim($uri, '/');
 $page = ($uri === '') ? 'home' : $uri;
 $page = str_replace('..', '', $page);
+$isConnected = isset($_SESSION['user_id']);
+$userId = $isConnected ? $_SESSION['user_id'] : null;
 
 //echo $page;
 
@@ -18,6 +21,8 @@ if ($page === 'login') {
     $file = __DIR__ . '/pages/auth/login.php';
 } elseif ($page === 'register') {
     $file = __DIR__ . '/pages/auth/register.php';
+} elseif ($page === 'profil') {
+    $file = __DIR__ . '/pages/auth/profil.php';
 } elseif ($page === 'logout') {
     $file = __DIR__ . '/pages/auth/logout.php';
 } elseif ($page === 'dashboard') {
