@@ -1,1 +1,7 @@
-<h2>Dashboard</h2>
+<?php
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /login");
+    exit();
+}
+echo "<h2>Dashboard</h2>";
+echo "<p>Bienvenue, " . htmlspecialchars($_SESSION['username']) . "!</p>";
