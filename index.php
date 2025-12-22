@@ -1,9 +1,7 @@
 <?php
-require __DIR__ . '/includes/config.php';
+require 'includes/config.php';
 
-include __DIR__ . '/includes/nav.php';
 $basePath = '/loty';
-
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if (str_starts_with($uri, $basePath)) {
@@ -11,23 +9,53 @@ if (str_starts_with($uri, $basePath)) {
 }
 
 $uri = trim($uri, '/');
-
-if ($uri === '') {
-    $page = 'home';
-} else {
-    $page = $uri;
-}
-
+$page = ($uri === '') ? 'home' : $uri;
 $page = str_replace('..', '', $page);
 
-$file = __DIR__ . '/pages/' . $page . '.php';
+//echo $page;
 
-if (file_exists($file)) {
-    require $file;
-    exit;
+if ($page === 'login') {
+    $file = __DIR__ . '/pages/auth/login.php';
+} elseif ($page === 'register') {
+    $file = __DIR__ . '/pages/auth/register.php';
+} elseif ($page === 'logout') {
+    $file = __DIR__ . '/pages/auth/logout.php';
+} elseif ($page === 'dashboard') {
+    $file = __DIR__ . '/pages/dashboard/dashboard.php';
+} else {
+    $file = __DIR__ . '/pages/' . $page . '.php';
 }
 
-http_response_code(404);
-require __DIR__ . '/pages/404.php';
+//echo $file;
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <?php
+    include __DIR__ . '/includes/meta.php';
+    ?>
+    <link rel="stylesheet" href="assets/css/temp.css">
+</head>
+<body>
 
-include __DIR__ . '/includes/footer.php';
+<header>
+    <?php include __DIR__ . '/includes/nav.php'; ?>
+</header>
+
+<main id="content">
+    <?php
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        http_response_code(404);
+        require __DIR__ . '/pages/404.php';
+    }
+    ?>
+</main>
+
+<footer>
+    <?php include __DIR__ . '/includes/footer.php'; ?>
+</footer>
+
+</body>
+</html>
