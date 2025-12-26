@@ -1,13 +1,10 @@
 <?php
 global $conn;
-require_once __DIR__ . '/../../includes/config.php';
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /login");
-    exit();
-}
+require_once __DIR__ . '/../../includes/utilities/db.php';
+require_once __DIR__ . '/../../includes/utilities/auth.php';
+check_logged_in();
 
-// Affichage des erreurs éventuelles
-// Aller chercher dans la base de données SQL l'id de l'erreur passée en paramètre GET "error"
+// Affichage des erreurs
 if (isset($_GET['error'])) {
     $error_code = $_GET['error'];
     $error_messages = [

@@ -40,7 +40,7 @@ if ($page === 'login') {
     <?php
     include __DIR__ . '/includes/meta.php';
     ?>
-    <link rel="stylesheet" href="assets/css/temp.css">
+    <link rel="stylesheet" href="/assets/css/temp.css">
     <title>LOTY</title>
 </head>
 <body>
@@ -50,11 +50,6 @@ if ($page === 'login') {
 </header>
 
 <main id="content">
-    <style>
-        * {
-            outline: 1px solid rgba(255, 0, 0, 0.2);
-        }
-    </style>
     <?php
     if (file_exists($file)) {
         require $file;

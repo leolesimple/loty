@@ -1,7 +1,7 @@
 <?php
 
 global $conn;
-require_once 'includes/config.php';
+require_once __DIR__ . '/../../includes/utilities/db.php';
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /login');

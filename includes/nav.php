@@ -1,7 +1,7 @@
 <nav class="nav">
     <div class="imgLinks">
         <a href="/">
-            <img src="assets/img/LOTY_Logo.svg" alt="" width="160">
+            <img src="/assets/img/LOTY_Logo.svg" alt="" width="160">
             <span class="sr-only">Aller à l'accueil</span>
         </a>
         <div>
@@ -17,7 +17,7 @@
         <?php
         if (isset($_SESSION['user_id'])) {
             echo '<a href="/profil" class="icon-link">
-                    <img src="assets/icons/accounts-icon.svg" alt="" width="54" height="54">
+                    <img src="/assets/icons/accounts-icon.svg" alt="" width="54" height="54">
                     <span class="sr-only">Voir mon compte</span>
                   </a>';
         } else {

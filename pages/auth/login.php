@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../includes/config.php';
+require_once __DIR__ . '/../../includes/utilities/db.php';
 
 if (isset($_GET['error'])) {
     $error_code = $_GET['error'];
