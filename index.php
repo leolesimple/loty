@@ -1,7 +1,4 @@
 <?php
-session_start();
-require 'includes/config.php';
-
 $basePath = '/loty';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -16,6 +13,10 @@ $isConnected = isset($_SESSION['user_id']);
 $userId = $isConnected ? $_SESSION['user_id'] : null;
 
 //echo $page;
+
+if ($page !== 'login') {
+    session_start();
+}
 
 if ($page === 'login') {
     $file = __DIR__ . '/pages/auth/login.php';
@@ -40,6 +41,7 @@ if ($page === 'login') {
     include __DIR__ . '/includes/meta.php';
     ?>
     <link rel="stylesheet" href="assets/css/temp.css">
+    <title>LOTY</title>
 </head>
 <body>
 
@@ -48,6 +50,11 @@ if ($page === 'login') {
 </header>
 
 <main id="content">
+    <style>
+        * {
+            outline: 1px solid rgba(255, 0, 0, 0.2);
+        }
+    </style>
     <?php
     if (file_exists($file)) {
         require $file;

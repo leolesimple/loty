@@ -1,6 +1,4 @@
 <?php
-// Check si un user est connecté
-session_start();
 if (isset($_SESSION['user_id'])) {
     echo "<p>Vous êtes connecté en tant que " . htmlspecialchars($_SESSION['username']) . ".</p>";
     echo '<a href="/loty/dashboard">Aller au tableau de bord</a>';
