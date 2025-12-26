@@ -7,7 +7,7 @@
         <div>
             <ul class="nav-list">
                 <li><a href="/" class="nav-link">Accueil</a></li>
-                <li><a href="/bentos" class="nav-link">Bento</a></li>
+                <li><a href="/bento" class="nav-link">Bento</a></li>
                 <li><a href="/recettes" class="nav-link">Recettes</a></li>
                 <li><a href="/podium" class="nav-link">Podium</a></li>
             </ul>
