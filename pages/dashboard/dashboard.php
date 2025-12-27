@@ -4,4 +4,4 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 echo "<h2>Dashboard</h2>";
-echo "<p>Bienvenue, " . htmlspecialchars($_SESSION['username']) . "!</p>";
+echo "<p>Bienvenue, " . clean($_SESSION['username']) . "!</p>";
