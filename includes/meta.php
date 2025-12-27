@@ -9,17 +9,17 @@ define('BASE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
     }
     function setTitle($title): string
     {
-        return "<title>" . htmlspecialchars($title) . "</title>\n";
+        return "<title>" . clean($title) . "</title>\n";
     }
 
     function setDescription($description): string
     {
-        return '<meta name="description" content="' . htmlspecialchars($description) . '">' . "\n";
+        return '<meta name="description" content="' . clean($description) . '">' . "\n";
     }
 
     function setKeywords($keywords): string
     {
-        return '<meta name="keywords" content="' . htmlspecialchars($keywords) . '">' . "\n";
+        return '<meta name="keywords" content="' . clean($keywords) . '">' . "\n";
     }
 ?>
 <meta charset="utf-8">

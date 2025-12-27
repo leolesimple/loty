@@ -1,4 +1,9 @@
-<header>
+<?php
+require_once __DIR__ . '/../includes/utilities/db.php';
+require_once __DIR__ . '/../includes/utilities/bentos.php';
+?>
+
+<header class="bentoHeader">
     <img src="/assets/img/bento-home.svg" alt="">
     <h1>
         Choisissez votre <span class="blueText">Bento</span> !
@@ -18,4 +23,35 @@
             </p>
         </a>
     </article>
+</section>
+
+<section class="teamBento">
+    <header class="bentoSectionHeader">
+        <h2>Les Bento de l'équipe LOTY</h2>
+        <p>
+            Des compositions créées par notre équipe étoilée !
+        </p>
+        <a class="seeMoreLink" href="/bento/team">
+            Voir plus de Bento de l'équipe
+        </a>
+    </header>
+
+    <div class="bentoGrid">
+        <?php echo generateTeamBentoLayout(3); ?>
+    </div>
+</section>
+
+<section class="communityBento">
+    <header class="bentoSectionHeader">
+        <h2>Manque d’inspiration ?</h2>
+        <p>
+            Parcours les Créations Bento de la communauté
+        </p>
+        <a class="seeMoreLink" href="/bento/community">
+            Voir plus de Bento de la communauté
+        </a>
+    </header>
+    <div class="bentoGrid">
+        <?php echo generateCommunityBentoLayout(8); ?>
+    </div>
 </section>

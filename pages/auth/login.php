@@ -9,7 +9,7 @@ if (isset($_GET['error'])) {
             'registered' => "Inscription réussie. Vous pouvez maintenant vous connecter.",
     ];
     if (array_key_exists($error_code, $error_messages)) {
-        echo "<p class='error-message' aria-live='polite' aria-atomic='true'>" . htmlspecialchars($error_messages[$error_code]) . "</p>";
+        echo "<p class='error-message' aria-live='polite' aria-atomic='true'>" . clean($error_messages[$error_code]) . "</p>";
     }
 }
 
@@ -97,11 +97,11 @@ if (isset($_POST["submit_login"])) {
 <h2>Connexion</h2>
 <p>Pas encore de compte ? <a href="/register">Inscrivez-vous</a>.</p>
 <?php if (isset($error)): ?>
-    <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+    <p style="color: red;"><?php echo clean($error); ?></p>
 <?php endif; ?>
 <form method="POST" action="">
     <label for="username">Nom d'utilisateur:</label>
-    <input type="text" id="username" name="username" required value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+    <input type="text" id="username" name="username" required value="<?php echo isset($username) ? clean($username) : ''; ?>">
     <br>
     <label for="password">Mot de passe:</label>
     <input type="password" id="password" name="password" required>
