@@ -51,21 +51,27 @@ function generateUserBentoLayout($count): string
 function generateCommunityBentoLayout($count): string
 {
     global $conn;
-    // si aucune création, afficher un message
-    if ($count <= 0) {
-        return '<p>Aucune création de la communauté pour le moment.</p>';
-    }
 
     $bentoLayout = '';
-    $bento_query = $conn->prepare(
-        "SELECT id_bento, bento_nom, description
-     FROM bento
-     WHERE id_user NOT BETWEEN 1 AND 4
-     AND id_user != :user_id
-     ORDER BY id_bento DESC
-     LIMIT :count"
-    );
-    $bento_query->bindValue(':count', $count, PDO::PARAM_INT);
+    if ($count === 0) {
+        $bento_query = $conn->prepare(
+            "SELECT id_bento, bento_nom, description
+         FROM bento
+         WHERE id_user NOT BETWEEN 1 AND 4
+         AND id_user != :user_id
+             ORDER BY date_creation DESC"
+        );
+    } else {
+        $bento_query = $conn->prepare(
+            "SELECT id_bento, bento_nom, description
+         FROM bento
+         WHERE id_user NOT BETWEEN 1 AND 4
+         AND id_user != :user_id
+         ORDER BY date_creation DESC
+         LIMIT :count"
+        );
+        $bento_query->bindValue(':count', $count, PDO::PARAM_INT);
+    }
     $bento_query->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $bento_query->execute();
     $bento_items = $bento_query->fetchAll();
@@ -85,20 +91,26 @@ function generateCommunityBentoLayout($count): string
 function generateTeamBentoLayout($count): string
 {
     global $conn;
-    // si aucune création, afficher un message
-    if ($count <= 0) {
-        return '<p>Aucune création de la communauté pour le moment.</p>';
-    }
 
     $bentoLayout = '';
-    $bento_query = $conn->prepare(
-        "SELECT id_bento, bento_nom, description
-     FROM bento
-     WHERE id_user BETWEEN 1 AND 4
-     ORDER BY id_bento DESC
-     LIMIT :count"
-    );
-    $bento_query->bindValue(':count', $count, PDO::PARAM_INT);
+    if ($count === 0) {
+        $bento_query = $conn->prepare(
+            "SELECT id_bento, bento_nom, description
+             FROM bento
+             WHERE id_user BETWEEN 1 AND 4
+             ORDER BY date_creation DESC"
+        );
+    } else {
+        $bento_query = $conn->prepare(
+            "SELECT id_bento, bento_nom, description
+             FROM bento
+             WHERE id_user BETWEEN 1 AND 4
+             ORDER BY date_creation DESC
+             LIMIT :count"
+        );
+        $bento_query->bindValue(':count', $count, PDO::PARAM_INT);
+    }
+
     $bento_query->execute();
     $bento_items = $bento_query->fetchAll();
     foreach ($bento_items as $bento) {
@@ -106,7 +118,7 @@ function generateTeamBentoLayout($count): string
         $title = $bento['bento_nom'];
         $description = $bento['description'];
         $id_bento = $bento['id_bento'];
-        $bentoLayout .= renderBentoItem($image, clean($title), clean($description) , $id_bento);
+        $bentoLayout .= renderBentoItem($image, clean($title), clean($description), $id_bento);
     }
     return $bentoLayout;
 }
