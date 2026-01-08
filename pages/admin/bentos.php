@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../includes/utilities/db.php';
 global $conn;
 
@@ -81,13 +80,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_bento'])) {
 
 if (isset($_GET['delete'])) {
 
-    $stmt = $conn->prepare("DELETE FROM bento WHERE id_bento = :id");
+    // Ensure we work with an integer id
+    $deleteId = (int) $_GET['delete'];
 
-    if ($stmt->execute(['id' => (int) $_GET['delete']])) {
-        $message = "Le bento a bien été supprimé.";
-        $messageType = "success";
-    } else {
-        $message = "Erreur lors de la suppression du bento.";
+    try {
+        // Start transaction so both child and parent deletions are atomic
+        $conn->beginTransaction();
+
+        // First delete dependent rows in bento_recettes to satisfy FK constraint
+        $delChild = $conn->prepare("DELETE FROM bento_recettes WHERE id_bento = :id");
+        if (!$delChild->execute(['id' => $deleteId])) {
+            // If child delete failed, rollback and show error
+            $conn->rollBack();
+            $message = "Erreur lors de la suppression des liaisons du bento.";
+            $messageType = "error";
+        } else {
+            // Now delete the bento itself
+            $del = $conn->prepare("DELETE FROM bento WHERE id_bento = :id");
+            if ($del->execute(['id' => $deleteId])) {
+                if ($del->rowCount() > 0) {
+                    $conn->commit();
+                    $message = "Le bento a bien été supprimé.";
+                    $messageType = "success";
+                } else {
+                    // Nothing deleted - bento not found
+                    $conn->rollBack();
+                    $message = "Bento introuvable ou déjà supprimé.";
+                    $messageType = "error";
+                }
+            } else {
+                $conn->rollBack();
+                $message = "Erreur lors de la suppression du bento.";
+                $messageType = "error";
+            }
+        }
+
+    } catch (PDOException $e) {
+        // Rollback if an exception occurred and present a friendly message
+        if ($conn->inTransaction()) {
+            $conn->rollBack();
+        }
+        // Log the detailed error if you have a logger (not added here), and show generic message
+        $message = "Impossible de supprimer ce bento : il est lié à d'autres enregistrements.";
         $messageType = "error";
     }
 }

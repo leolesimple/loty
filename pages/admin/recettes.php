@@ -1,11 +1,6 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../includes/utilities/db.php';
 global $conn;
-
-/* ===============================
-   SÉCURITÉ ADMIN
-================================ */
 
 if (!isset($_SESSION['user_id'])) {
     http_response_code(403);
@@ -21,23 +16,11 @@ if (!$user || $user['role'] !== 'admin') {
     exit("Accès réservé à l’administration");
 }
 
-/* ===============================
-   MESSAGE
-================================ */
-
 $message = '';
 $messageType = 'success';
 
-/* ===============================
-   TYPES DE RECETTES
-================================ */
-
 $typesStmt = $conn->query("SELECT id_type, nom_type FROM type_recette");
 $types = $typesStmt->fetchAll(PDO::FETCH_ASSOC);
-
-/* ===============================
-   AJOUT RECETTE
-================================ */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_recette'])) {
 
@@ -68,10 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_recette'])) {
         $messageType = "error";
     }
 }
-
-/* ===============================
-   MODIFICATION RECETTE
-================================ */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_recette'])) {
 
@@ -105,10 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_recette'])) {
     }
 }
 
-/* ===============================
-   SUPPRESSION RECETTE
-================================ */
-
 if (isset($_GET['delete'])) {
 
     $stmt = $conn->prepare("DELETE FROM recette WHERE id_recette = :id");
@@ -121,10 +96,6 @@ if (isset($_GET['delete'])) {
         $messageType = "error";
     }
 }
-
-/* ===============================
-   LISTE DES RECETTES
-================================ */
 
 $stmt = $conn->query("
     SELECT
@@ -158,10 +129,6 @@ $recettes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     <?php endif; ?>
 
-    <!-- ===============================
-         AJOUT
-    ================================ -->
-
     <section class="adminSection">
 
         <h2>Ajouter une recette</h2>
@@ -192,10 +159,6 @@ $recettes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
 
     </section>
-
-    <!-- ===============================
-         LISTE + ÉDITION
-    ================================ -->
 
     <section class="adminSection">
 

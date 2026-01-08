@@ -1,11 +1,6 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../includes/utilities/db.php';
 global $conn;
-
-/* ===============================
-   SÉCURITÉ ADMIN
-================================ */
 
 if (!isset($_SESSION['user_id'])) {
     http_response_code(403);
@@ -21,16 +16,8 @@ if (!$currentUser || $currentUser['role'] !== 'admin') {
     exit("Accès réservé à l’administration");
 }
 
-/* ===============================
-   MESSAGE
-================================ */
-
 $message = '';
 $messageType = 'success';
-
-/* ===============================
-   MODIFICATION USER
-================================ */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
 
@@ -68,10 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
     }
 }
 
-/* ===============================
-   SUPPRESSION USER
-================================ */
-
 if (isset($_GET['delete'])) {
 
     $deleteId = (int) $_GET['delete'];
@@ -92,10 +75,6 @@ if (isset($_GET['delete'])) {
         }
     }
 }
-
-/* ===============================
-   LISTE DES USERS
-================================ */
 
 $stmt = $conn->query("
     SELECT
