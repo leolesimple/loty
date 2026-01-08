@@ -33,7 +33,43 @@ if ($page === 'login') {
     $file = __DIR__ . '/pages/' . $page . '.php';
 }
 
-//echo $file;
+// Ajout au panier des bentos
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+
+    header('Content-Type: application/json; charset=utf-8');
+
+    if (
+            empty($_POST['bento_id']) ||
+            empty($_POST['bento_nom'])
+    ) {
+        echo json_encode(['status' => 'error']);
+        exit();
+    }
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $id = (int) $_POST['bento_id'];
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['quantity'] += 1;
+    } else {
+        $_SESSION['cart'][$id] = [
+                'id' => $id,
+                'nom' => $_POST['bento_nom'],
+                'quantity' => 1
+        ];
+    }
+
+    echo json_encode([
+            'status' => 'ok',
+            'quantity' => $_SESSION['cart'][$id]['quantity']
+    ]);
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

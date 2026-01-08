@@ -27,7 +27,7 @@
 
         <?php
         if (isset($_SESSION['user_id'])) {
-            echo '<a href="/profil" class="nav-button-link">
+            echo '<a href="/panier" class="nav-button-link">
                     <p class="button-text">Panier</p>
                   </a>';
         } else {
