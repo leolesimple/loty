@@ -6,14 +6,16 @@ global $conn;
 function renderBentoItem(string $image, string $title, string $description, string $id_bento): string
 {
     return '
-    <a href="/bento/view?id=' . urlencode($id_bento) . '" class="bentoLink">
-        <article class="bentoItem"  data-title="' . $title . '">
-            <img src="' . $image . '" alt="" width="215" height="215" class="bentoImage">
-            <div class="bentoInfo">
+    <a href="/bento/view?id=' . urlencode($id_bento) . '" class="large_card" >
+        <article  data-title="' . $title . '" class="large_card_info">
+            <div class="topCard">
+                <img src="' . $image . '" alt="" class="CardImage">
                 <h3>' . $title . '</h3>
+            </div>
+            <div class="bottomCard">
                 <p>' . $description . '</p>
             </div>
-            <img src="assets/icons/chevron-right.svg" alt="" width="auto" height="24" class="chevronIcon">
+            
         </article>
     </a>';
 }

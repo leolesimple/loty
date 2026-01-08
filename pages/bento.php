@@ -6,43 +6,107 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once __DIR__ . '/../includes/utilities/db.php';
 require_once __DIR__ . '/../includes/utilities/bentos.php';
+
+function clean(string $text): string
+{
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+}
 ?>
 
-<header class="bentoHeader">
-    <img src="/assets/img/bento-home.svg" alt="">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>Document</title>
+</head>
+<body>
+
+<nav>
+    <div class="top_nav">
+        <div></div>
+        <a href="/">
+            <img src="../assets/img/LOTY_Logo.svg" class="nav_logo">
+            <span class="sr-only">Aller à l'accueil</span>
+        </a>
+        
+        <div class="nav_actions">
+            <?php
+        if (isset($_SESSION['user_id'])) {
+            echo '<a href="/profil">
+                    <img src="/assets/icons/accounts-icon.svg" alt="" class="profile_icon">
+                    <span class="sr-only">Voir mon compte</span>
+                  </a>';
+        } else {
+            echo '';
+        }
+        ?>
+            <?php
+        if (isset($_SESSION['user_id'])) {
+            echo '<a href="/panier" class="nav-button-link">
+                    <p class="button-text">Panier</p>
+                  </a>';
+        } else {
+            echo '<a href="/login">
+                    <p class="btn_red btn">S\'IDENTIFIER</p>
+                  </a>';
+        }
+        ?>
+        </div>
+    </div>
+    <div class="bottom_nav">
+        <ul>
+            <li><a>ACCUEIL</a></li>
+            <li><a class="blueText">BENTO</a></li>
+            <li><a>RECETTES</a></li>
+            <li><a>PODIUM</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="bentoHeader">
+    <img src="../assets/img/bento-home.svg" alt="">
     <h1>
         Choisissez votre <span class="blueText">Bento</span> !
     </h1>
-</header>
-
+</section>
 <section class="emptyBento">
     <h2>
         Envie de créer ton Bento de zéro ? Pars d’un Bento vide !
     </h2>
-    <article class="bentoCard">
-        <a href="/bento/create?type=empty" class="bentoLink">
-            <img src="/assets/img/bento-empty.svg" alt="Bento vide" class="bentoImage">
-            <h3 class="bentoTitle">Bento Vide</h3>
-            <p>
+        <a href="/bento/create?type=empty" class="EmptyBentoCard">
+            <div class="EmptyBentoCard_left">
+                <img src="/assets/img/bento-empty.svg" alt="Bento vide">
+            </div>
+            <div class="EmptyBentoCard_right">
+                <h3 class="bentoTitle">Bento Vide</h3>
+                <p>
                 Crée un Bento personnalisé en partant d'une base vierge. Laisse libre cours à ta créativité !
-            </p>
+                </p>
+        </div>
         </a>
-    </article>
 </section>
 
 <section class="teamBento">
-    <header class="bentoSectionHeader">
+    <div class="teamBento_left">
         <h2>Les Bento de l'équipe LOTY</h2>
         <p>
             Des compositions créées par notre équipe étoilée !
         </p>
-        <a class="seeMoreLink" href="/bento/team">
+        <div class="btn_beige btn">
+            <a  href="/bento/team">
             Voir plus de Bento de l'équipe
         </a>
-    </header>
-
-    <div class="bentoGrid">
-        <?php echo generateTeamBentoLayout(3); ?>
+        </div>
+        
+</div>
+    <div class="teamBento_right">
+        <!-- <div class="large_card"> -->
+        <?php
+        echo generateTeamBentoLayout(3);
+        ?>
+        <!-- </div> -->
     </div>
 </section>
 
@@ -60,3 +124,15 @@ require_once __DIR__ . '/../includes/utilities/bentos.php';
         <?php echo generateCommunityBentoLayout(8); ?>
     </div>
 </section>
+
+<footer>
+    <img src="../assets/img/LOTY_Logo.svg">
+    <div>
+        plan du site
+        mentions légales
+    </div>
+</footer>
+
+</body>
+</html>
+
