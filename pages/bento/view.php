@@ -1,40 +1,8 @@
 <?php
-global $conn;
+session_start();
+
 require_once __DIR__ . '/../../includes/utilities/db.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-
-    if (
-            empty($_POST['bento_id']) ||
-            empty($_POST['bento_nom'])
-    ) {
-        http_response_code(400);
-        echo json_encode(['status' => 'error']);
-        exit();
-    }
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-
-    $id = (int)$_POST['bento_id'];
-
-    if (isset($_SESSION['cart'][$id])) {
-        $_SESSION['cart'][$id]['quantity'] += 1;
-    } else {
-        $_SESSION['cart'][$id] = [
-                'id' => $id,
-                'nom' => $_POST['bento_nom'],
-                'quantity' => 1
-        ];
-    }
-
-    echo json_encode([
-            'status' => 'ok',
-            'quantity' => $_SESSION['cart'][$id]['quantity']
-    ]);
-    exit();
-}
+global $conn;
 
 if (!isset($_GET['id'])) {
     echo "<p>ID de bento manquant.</p>";
@@ -183,25 +151,36 @@ foreach ($bentoData as $row) {
         const form = document.querySelector(".addToCartForm")
         const feedback = document.querySelector(".cartFeedback")
 
-        form.addEventListener("submit", async event => {
-            event.preventDefault()
+        if (form) {
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault()
 
-            const response = await fetch(window.location.href, {
-                method: "POST",
-                body: new FormData(form)
+                const response = await fetch(window.location.href, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                })
+
+                const text = await response.text()
+
+                try {
+                    const data = JSON.parse(text)
+
+                    if (data.status === "ok") {
+                        feedback.textContent = "Ajouté au panier (x" + data.quantity + ")"
+                    } else {
+                        feedback.textContent = "Erreur lors de l’ajout."
+                    }
+                } catch (e) {
+                    console.error("Réponse invalide :", text);
+                    alert("Le serveur a renvoyé ceci au lieu du JSON :\n\n" + text);
+                    feedback.textContent = "Erreur technique."
+                }
             })
-
-            if (!response.ok) {
-                feedback.textContent = "Erreur lors de l’ajout au panier."
-                return
-            }
-
-            const data = await response.json()
-
-            if (data.status === "ok") {
-                feedback.textContent = "Ajouté au panier (x" + data.quantity + ")"
-            }
-        })
+        }
     </script>
+
 
 </main>
