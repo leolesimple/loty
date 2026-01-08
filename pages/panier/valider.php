@@ -8,16 +8,24 @@ if (empty($_SESSION['cart'])) {
     exit();
 }
 
-$bentoIds = array_keys($_SESSION['cart']);
+/* ---------- CONFIG MAIL ---------- */
 
+$sendMail = isset($_POST['send_mail']);
+$userMail = $_POST['email'] ?? null;
+
+/* ---------- RÉCUP BENTOS ---------- */
+
+$bentoIds = array_keys($_SESSION['cart']);
 $placeholders = implode(',', array_fill(0, count($bentoIds), '?'));
+
+/* ---------- SQL ---------- */
 
 $sql = "
 SELECT
     ingredients.id_ingredient,
     ingredients.nom AS ingredient_nom,
     ingredients_recettes.quantite,
-    unites.unites AS unite_nom
+    unites.unites AS unite
 FROM bento_recettes
 JOIN ingredients_recettes ON bento_recettes.id_recette = ingredients_recettes.id_recette
 JOIN ingredients ON ingredients_recettes.id_ingredients = ingredients.id_ingredient
@@ -29,72 +37,158 @@ $stmt = $conn->prepare($sql);
 $stmt->execute($bentoIds);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$ingredientsFinal = [];
+/* ---------- AGRÉGATION ---------- */
+
+$ingredients = [];
 
 foreach ($rows as $row) {
 
-    $key = $row['id_ingredient'] . '_' . $row['unite_nom'];
+    $name = $row['ingredient_nom'];
+    $qty = (float) $row['quantite'];
+    $unit = $row['unite'];
 
-    if (!isset($ingredientsFinal[$key])) {
-        $ingredientsFinal[$key] = [
-            'nom' => $row['ingredient_nom'],
-            'quantite' => (float) $row['quantite'],
-            'unite' => $row['unite_nom']
+    if (!isset($ingredients[$name])) {
+        $ingredients[$name] = [
+                'g' => 0,
+                'ml' => 0,
+                'count' => 0
         ];
+    }
+
+    switch ($unit) {
+        case 'g':
+            $ingredients[$name]['g'] += $qty;
+            break;
+        case 'kg':
+            $ingredients[$name]['g'] += $qty * 1000;
+            break;
+        case 'mL':
+            $ingredients[$name]['ml'] += $qty;
+            break;
+        case 'L':
+            $ingredients[$name]['ml'] += $qty * 1000;
+            break;
+        default:
+            $ingredients[$name]['count'] += $qty ?: 1;
+            break;
+    }
+}
+
+/* ---------- FORMAT FINAL ---------- */
+
+$finalIngredients = [];
+
+foreach ($ingredients as $name => $data) {
+
+    if ($data['g'] > 0) {
+        if ($data['g'] >= 1000) {
+            $finalIngredients[] = [
+                    'nom' => $name,
+                    'quantite' => $data['g'] / 1000,
+                    'unite' => 'kg'
+            ];
+        } else {
+            $finalIngredients[] = [
+                    'nom' => $name,
+                    'quantite' => $data['g'],
+                    'unite' => 'g'
+            ];
+        }
+    }
+
+    if ($data['ml'] > 0) {
+        if ($data['ml'] >= 1000) {
+            $finalIngredients[] = [
+                    'nom' => $name,
+                    'quantite' => $data['ml'] / 1000,
+                    'unite' => 'L'
+            ];
+        } else {
+            $finalIngredients[] = [
+                    'nom' => $name,
+                    'quantite' => $data['ml'],
+                    'unite' => 'mL'
+            ];
+        }
+    }
+
+    if ($data['count'] > 0) {
+        $finalIngredients[] = [
+                'nom' => $name,
+                'quantite' => $data['count'],
+                'unite' => 'x'
+        ];
+    }
+}
+
+/* ---------- ENVOI MAIL ---------- */
+
+$mailStatus = null;
+
+if ($sendMail && filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
+
+    $content = "Liste de courses LOTY\n\n";
+
+    foreach ($finalIngredients as $item) {
+        $content .= "- {$item['quantite']} {$item['unite']} {$item['nom']}\n";
+    }
+
+    $headers = "From: LOTY <no-reply@loty.fr>";
+
+    if (mail($userMail, "Votre liste de courses LOTY", $content, $headers)) {
+        $mailStatus = "Mail envoyé avec succès.";
     } else {
-        $ingredientsFinal[$key]['quantite'] += (float) $row['quantite'];
+        $mailStatus = "Erreur lors de l’envoi du mail.";
     }
 }
 ?>
 
-<main class="ingredientsPageContainer">
+<main>
 
-    <header class="ingredientsHeader">
+    <header>
         <h1>Liste des ingrédients</h1>
     </header>
 
-    <section class="selectedBentosSection">
+    <section>
         <h2>Bentos sélectionnés</h2>
+        <ul>
+            <?php foreach ($_SESSION['cart'] as $bento): ?>
+                <li><?= htmlspecialchars($bento['nom']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </section>
 
-        <ul class="selectedBentosList">
-            <?php foreach ($_SESSION['cart'] as $item): ?>
-                <li class="selectedBentoItem">
-                    <article>
-                        <figure class="bentoThumb"></figure>
-                        <h3><?= htmlspecialchars($item['nom']) ?></h3>
-                    </article>
+    <section>
+        <h2>Ingrédients totaux</h2>
+
+        <ul>
+            <?php foreach ($finalIngredients as $item): ?>
+                <li>
+                    <?= rtrim(rtrim(number_format($item['quantite'], 2, '.', ''), '0'), '.') ?>
+                    <?= htmlspecialchars($item['unite']) ?>
+                    <?= htmlspecialchars($item['nom']) ?>
                 </li>
             <?php endforeach; ?>
         </ul>
     </section>
 
-    <section class="ingredientsListSection">
-        <h2>Liste des ingrédients</h2>
-
-        <ul class="ingredientsList">
-
-            <?php foreach ($ingredientsFinal as $ingredient): ?>
-                <li class="ingredientRow">
-                    <span class="ingredientIcon"></span>
-
-                    <span class="ingredientQuantity">
-                        <?= rtrim(rtrim(number_format($ingredient['quantite'], 2, '.', ''), '0'), '.') ?>
-                        <?= htmlspecialchars($ingredient['unite']) ?>
-                    </span>
-
-                    <span class="ingredientName">
-                        <?= htmlspecialchars($ingredient['nom']) ?>
-                    </span>
-                </li>
-            <?php endforeach; ?>
-
-        </ul>
+    <section>
+        <button onclick="window.print()">Imprimer la liste</button>
     </section>
 
-    <section class="actionsSection">
-        <button type="button" onclick="window.print()">
-            Imprimer la liste
-        </button>
+    <section>
+        <h2>Envoyer par mail</h2>
+
+        <form method="post">
+            <label for="email">Votre email :</label>
+            <input type="email" id="email" name="email" required placeholder="Votre email">
+            <input type="hidden" name="send_mail" value="1">
+            <button type="submit">Envoyer</button>
+        </form>
+
+        <?php if ($mailStatus): ?>
+            <p><?= htmlspecialchars($mailStatus) ?></p>
+        <?php endif; ?>
     </section>
 
 </main>
