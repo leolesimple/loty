@@ -22,7 +22,17 @@ if (!$user || $user['role'] !== 'admin') {
 ?>
 
 <main class="adminDashboard">
-
+    <style>
+        .navElse {
+             background-color: #00000000;
+             display: flex;
+             flex-direction: column;
+             position: static;
+             width: 100%;
+             top: auto;
+             z-index: 999;
+        }
+    </style>
     <header class="adminHeader">
         <h1>Administration LOTY</h1>
         <p>Interface de gestion</p>
@@ -30,7 +40,7 @@ if (!$user || $user['role'] !== 'admin') {
 
     <section class="adminNavigation">
 
-        <nav aria-label="Navigation administration">
+        <nav class="navElse" aria-label="Navigation administration">
             <ul>
                 <li>
                     <a href="/admin/bentos">
