@@ -8,17 +8,11 @@ if (empty($_SESSION['cart'])) {
     exit();
 }
 
-/* ---------- CONFIG MAIL ---------- */
-
 $sendMail = isset($_POST['send_mail']);
 $userMail = $_POST['email'] ?? null;
 
-/* ---------- RÉCUP BENTOS ---------- */
-
 $bentoIds = array_keys($_SESSION['cart']);
 $placeholders = implode(',', array_fill(0, count($bentoIds), '?'));
-
-/* ---------- SQL ---------- */
 
 $sql = "
 SELECT
@@ -37,14 +31,12 @@ $stmt = $conn->prepare($sql);
 $stmt->execute($bentoIds);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/* ---------- AGRÉGATION ---------- */
-
 $ingredients = [];
 
 foreach ($rows as $row) {
 
     $name = $row['ingredient_nom'];
-    $qty = (float) $row['quantite'];
+    $qty = (float)$row['quantite'];
     $unit = $row['unite'];
 
     if (!isset($ingredients[$name])) {
@@ -73,8 +65,6 @@ foreach ($rows as $row) {
             break;
     }
 }
-
-/* ---------- FORMAT FINAL ---------- */
 
 $finalIngredients = [];
 
@@ -121,8 +111,6 @@ foreach ($ingredients as $name => $data) {
     }
 }
 
-/* ---------- ENVOI MAIL ---------- */
-
 $mailStatus = null;
 
 if ($sendMail && filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
@@ -144,51 +132,49 @@ if ($sendMail && filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
 ?>
 
 <main>
-
-    <header>
-        <h1>Liste des ingrédients</h1>
+    <header class="headerTitle">
+        <h1 class="title">Liste des ingrédients</h1>
     </header>
 
-    <section>
-        <h2>Bentos sélectionnés</h2>
-        <ul>
+    <section class="bentosSelected">
+        <h2 class="sectionTitle">Bentos sélectionnés</h2>
+        <ul class="bentosList">
             <?php foreach ($_SESSION['cart'] as $bento): ?>
-                <li><?= htmlspecialchars($bento['nom']) ?></li>
+                <li class="bentoItem"><?= htmlspecialchars($bento['nom']) ?></li>
             <?php endforeach; ?>
         </ul>
     </section>
 
-    <section>
-        <h2>Ingrédients totaux</h2>
+    <section class="ingredientsTotal">
+        <h2 class="sectionTitle">Ingrédients totaux</h2>
 
-        <ul>
+        <ul class="ingredientsList">
             <?php foreach ($finalIngredients as $item): ?>
-                <li>
+                <li class="ingredientItem">
                     <?= rtrim(rtrim(number_format($item['quantite'], 2, '.', ''), '0'), '.') ?>
-                    <?= htmlspecialchars($item['unite']) ?>
-                    <?= htmlspecialchars($item['nom']) ?>
+                    <span class="ingredientUnit"><?= htmlspecialchars($item['unite']) ?></span>
+                    <span class="ingredientName"><?= htmlspecialchars($item['nom']) ?></span>
                 </li>
             <?php endforeach; ?>
         </ul>
     </section>
 
-    <section>
-        <button onclick="window.print()">Imprimer la liste</button>
+    <section class="printSection">
+        <button class="printButton" onclick="window.print()">Imprimer la liste</button>
     </section>
 
-    <section>
-        <h2>Envoyer par mail</h2>
+    <section class="mailSection">
+        <h2 class="sectionTitle">Envoyer par mail</h2>
 
-        <form method="post">
-            <label for="email">Votre email :</label>
-            <input type="email" id="email" name="email" required placeholder="Votre email">
-            <input type="hidden" name="send_mail" value="1">
-            <button type="submit">Envoyer</button>
+        <form method="post" class="mailForm">
+            <label for="email" class="emailLabel">Votre email :</label>
+            <input type="email" id="email" name="email" required placeholder="Votre email" class="emailInput">
+            <input type="hidden" name="send_mail" value="1" class="sendMailHidden">
+            <button type="submit" class="sendButton">Envoyer</button>
         </form>
 
         <?php if ($mailStatus): ?>
-            <p><?= htmlspecialchars($mailStatus) ?></p>
+            <p class="mailStatusMessage"><?= htmlspecialchars($mailStatus) ?></p>
         <?php endif; ?>
     </section>
-
 </main>
