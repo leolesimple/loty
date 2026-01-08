@@ -94,21 +94,82 @@ if (isset($_POST["submit_login"])) {
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    
+<nav>
+    <div class="top_nav">
+        <div></div>
+        <a href="/">
+            <img src="../../assets/img/LOTY_Logo.svg" class="nav_logo">
+            <span class="sr-only">Aller à l'accueil</span>
+        </a>
+        
+        <div class="nav_actions">
+            <?php
+        if (isset($_SESSION['user_id'])) {
+            echo '<a href="/profil">
+                    <img src="/assets/icons/accounts-icon.svg" alt="" class="profile_icon">
+                    <span class="sr-only">Voir mon compte</span>
+                  </a>';
+        } else {
+            echo '';
+        }
+        ?>
+            <?php
+        if (isset($_SESSION['user_id'])) {
+            echo '<a href="/panier" class="nav-button-link">
+                    <p class="button-text">Panier</p>
+                  </a>';
+        } else {
+            echo '<a href="/login">
+                    <p class="btn_red btn">S\'IDENTIFIER</p>
+                  </a>';
+        }
+        ?>
+        </div>
+    </div>
+    <div class="bottom_nav">
+        <ul>
+            <li><a>ACCUEIL</a></li>
+            <li><a class="blueText">BENTO</a></li>
+            <li><a>RECETTES</a></li>
+            <li><a>PODIUM</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="login_container">
 <h2>Connexion</h2>
 <p>Pas encore de compte ? <a href="/register">Inscrivez-vous</a>.</p>
 <?php if (isset($error)): ?>
     <p style="color: red;"><?php echo clean($error); ?></p>
 <?php endif; ?>
-<form method="POST" action="">
-    <label for="username">Nom d'utilisateur:</label>
+<form method="POST" action="" class="login_form">
+    <label for="username">Nom d'utilisateur*</label><br>
     <input type="text" id="username" name="username" required value="<?php echo isset($username) ? clean($username) : ''; ?>">
     <br>
-    <label for="password">Mot de passe:</label>
+    <label for="password">Mot de passe*</label><br>
     <input type="password" id="password" name="password" required>
     <br>
-    <label>
+    <label class="remember_me">
         <input type="checkbox" name="remember_me" value="1" <?php echo (isset($remember) && $remember) ? 'checked' : ''; ?>> Se souvenir de moi
     </label>
     <br>
-    <button type="submit" name="submit_login">Se connecter</button>
+    <button class="btn btn_red" type="submit" name="submit_login">SE CONNECTER</button>
 </form>
+</section>
+
+
+
+</body>
+</html>
+
