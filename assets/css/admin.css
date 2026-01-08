@@ -1,0 +1,178 @@
+:root {
+    --admin-bg: #fbf3e8;
+    --admin-red: #e84545;
+    --admin-red-soft: rgba(232, 69, 69, 0.15);
+    --admin-green: #2ecc71;
+    --admin-text: #1e1e1e;
+    --admin-radius: 16px;
+}
+
+body {
+    background-color: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+.adminContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.adminHeader {
+    margin-bottom: 32px;
+}
+
+.adminHeader h1 {
+    font-size: 32px;
+    color: var(--admin-red);
+}
+
+.adminNav {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.adminNav a {
+    padding: 12px 20px;
+    border: 2px solid var(--admin-red);
+    border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+    color: var(--admin-red);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.adminNav a[aria-current="page"] {
+    background-color: var(--admin-red);
+    color: white;
+}
+
+.adminSection {
+    border: 2px solid var(--admin-red);
+    border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+    padding: 24px;
+    margin-bottom: 32px;
+    background-color: transparent;
+}
+
+.adminSection h2 {
+    margin-bottom: 16px;
+    color: var(--admin-red);
+}
+
+.adminTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.adminTable th,
+.adminTable td {
+    padding: 12px;
+    border-bottom: 1px solid var(--admin-red-soft);
+    text-align: left;
+}
+
+.adminTable th {
+    font-weight: 600;
+}
+
+.adminActions {
+    display: flex;
+    gap: 8px;
+}
+
+.adminButton {
+    padding: 8px 14px;
+    border: 2px solid var(--admin-red);
+    background-color: transparent;
+    color: var(--admin-red);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.adminButton.primary {
+    background-color: var(--admin-red);
+    color: white;
+}
+
+.adminButton.danger {
+    border-color: var(--admin-red);
+    color: var(--admin-red);
+}
+
+.adminForm {
+    display: grid;
+    gap: 20px;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formField label {
+    font-weight: 600;
+}
+
+.formField input,
+.formField textarea,
+.formField select {
+    padding: 12px;
+    border: 2px solid var(--admin-red);
+    background-color: transparent;
+    font-size: 16px;
+    border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.adminFeedback {
+    margin-top: 16px;
+    padding: 14px;
+    font-weight: 600;
+    border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+}
+
+.adminFeedback.success {
+    border: 2px solid var(--admin-green);
+    color: var(--admin-green);
+}
+
+.adminFeedback.error {
+    border: 2px solid var(--admin-red);
+    color: var(--admin-red);
+}
+
+.adminCardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.adminCard {
+    border: 2px solid var(--admin-red);
+    border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+    padding: 16px;
+}
+
+.adminCard h3 {
+    margin-bottom: 8px;
+    color: var(--admin-red);
+}
+
+.adminCard p {
+    font-size: 14px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
