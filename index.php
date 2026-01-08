@@ -77,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <?php
     include __DIR__ . '/includes/meta.php';
     ?>
-    <link rel="stylesheet" href="/assets/css/temp.css">
+    <!-- <link rel="stylesheet" href="/assets/css/temp.css"> -->
+    <link rel="stylesheet" href="/assets/css/main.css">
     <title>LOTY</title>
 </head>
 <body>
