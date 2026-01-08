@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 require_once __DIR__ . '/../../includes/utilities/db.php';
 global $conn;
