@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $_SESSION['cart'] = [];
     }
 
-    $id = (int) $_POST['bento_id'];
+    $id = (int)$_POST['bento_id'];
 
     if (isset($_SESSION['cart'][$id])) {
         $_SESSION['cart'][$id]['quantity'] += 1;
@@ -78,6 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     include __DIR__ . '/includes/meta.php';
     ?>
     <link rel="stylesheet" href="/assets/css/main.css">
+    <?php
+    if (str_starts_with($page, 'admin')) {
+        echo '<link rel="stylesheet" href="/assets/css/admin.css">';
+    }
+    ?>
+    <style>
+        header > nav.nav {
+            display: none;
+        }
+    </style>
     <title>LOTY</title>
 </head>
 <body>
