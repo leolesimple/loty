@@ -12,12 +12,6 @@ $bentoIds = array_keys($_SESSION['cart']);
 
 $placeholders = implode(',', array_fill(0, count($bentoIds), '?'));
 
-/*
-1. Récupérer toutes les recettes des bentos
-2. Récupérer tous les ingrédients de ces recettes
-3. Additionner les quantités
-*/
-
 $sql = "
 SELECT
     ingredients.id_ingredient,
@@ -34,8 +28,6 @@ WHERE bento_recettes.id_bento IN ($placeholders)
 $stmt = $conn->prepare($sql);
 $stmt->execute($bentoIds);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-/* Agrégation */
 
 $ingredientsFinal = [];
 
