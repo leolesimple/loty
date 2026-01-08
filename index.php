@@ -41,7 +41,8 @@ if ($page === 'login') {
     <?php
     include __DIR__ . '/includes/meta.php';
     ?>
-    <link rel="stylesheet" href="/assets/css/temp.css">
+    <!-- <link rel="stylesheet" href="/assets/css/temp.css"> -->
+    <link rel="stylesheet" href="/assets/css/main.css">
     <title>LOTY</title>
 </head>
 <body>
