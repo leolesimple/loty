@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $_SESSION['cart'] = [];
     }
 
-    $id = (int) $_POST['bento_id'];
+    $id = (int)$_POST['bento_id'];
 
     if (isset($_SESSION['cart'][$id])) {
         $_SESSION['cart'][$id]['quantity'] += 1;
@@ -166,17 +166,42 @@ foreach ($bentoData as $row) {
 
     <section class="bentoActions">
 
-        <form method="post" action="/loty/bento/add-to-cart">
-            <input type="hidden" name="id_bento" value="<?= (int)$bento['id'] ?>">
-            <input type="hidden" name="bento_nom" value="<?= $bento['nom'] ?>">
-            <input type="hidden" name="image_src" value="<?= $bento['image_src'] ?? '' ?>">
+        <form method="post" class="addToCartForm">
+            <input type="hidden" name="add_to_cart" value="1">
+            <input type="hidden" name="bento_id" value="<?= (int)$bento['id'] ?>">
+            <input type="hidden" name="bento_nom" value="<?= htmlspecialchars($bento['nom']) ?>">
 
             <button type="submit" class="mainAddButton">
                 Ajouter au panier
             </button>
         </form>
 
+        <span class="cartFeedback" aria-live="polite"></span>
 
     </section>
+    <script>
+        const form = document.querySelector(".addToCartForm")
+        const feedback = document.querySelector(".cartFeedback")
+
+        form.addEventListener("submit", async event => {
+            event.preventDefault()
+
+            const response = await fetch(window.location.href, {
+                method: "POST",
+                body: new FormData(form)
+            })
+
+            if (!response.ok) {
+                feedback.textContent = "Erreur lors de l’ajout au panier."
+                return
+            }
+
+            const data = await response.json()
+
+            if (data.status === "ok") {
+                feedback.textContent = "Ajouté au panier (x" + data.quantity + ")"
+            }
+        })
+    </script>
 
 </main>
