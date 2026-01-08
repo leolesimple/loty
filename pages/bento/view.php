@@ -1,0 +1,182 @@
+<?php
+global $conn;
+require_once __DIR__ . '/../../includes/utilities/db.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+
+    if (
+            empty($_POST['bento_id']) ||
+            empty($_POST['bento_nom'])
+    ) {
+        http_response_code(400);
+        echo json_encode(['status' => 'error']);
+        exit();
+    }
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $id = (int) $_POST['bento_id'];
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['quantity'] += 1;
+    } else {
+        $_SESSION['cart'][$id] = [
+                'id' => $id,
+                'nom' => $_POST['bento_nom'],
+                'quantity' => 1
+        ];
+    }
+
+    echo json_encode([
+            'status' => 'ok',
+            'quantity' => $_SESSION['cart'][$id]['quantity']
+    ]);
+    exit();
+}
+
+if (!isset($_GET['id'])) {
+    echo "<p>ID de bento manquant.</p>";
+    exit();
+}
+
+$bentoId = (int)$_GET['id'];
+
+$sql = "
+SELECT
+    bento.id_bento,
+    bento.bento_nom,
+    bento.description,
+    recette.id_recette,
+    recette.recette_nom
+FROM bento
+LEFT JOIN bento_recettes ON bento.id_bento = bento_recettes.id_bento
+LEFT JOIN recette ON bento_recettes.id_recette = recette.id_recette
+WHERE bento.id_bento = :bentoId
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':bentoId', $bentoId, PDO::PARAM_INT);
+$stmt->execute();
+$bentoData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (!$bentoData) {
+    echo "<p>Bento introuvable.</p>";
+    exit();
+}
+
+$bento = [
+        'id' => $bentoData[0]['id_bento'],
+        'nom' => $bentoData[0]['bento_nom'],
+        'description' => $bentoData[0]['description']
+];
+
+$recipes = [];
+
+foreach ($bentoData as $row) {
+    if ($row['id_recette']) {
+        $recipes[$row['id_recette']] = [
+                'id' => $row['id_recette'],
+                'nom' => $row['recette_nom']
+        ];
+    }
+}
+?>
+<main class="bentoPageContainer">
+
+    <nav class="navigationAction" aria-label="Navigation secondaire">
+        <a href="/bento" class="backButton" aria-label="Retour à la liste des bentos">
+            <span class="iconArrowLeft"></span>
+        </a>
+    </nav>
+
+    <header class="bentoHeader">
+
+        <h1 class="bentoTitle">
+            <?= htmlspecialchars($bento['nom']) ?>
+        </h1>
+
+    </header>
+
+    <section class="bentoMainContent">
+
+        <section class="bentoIdentity">
+
+            <figure class="bentoImageWrapper">
+
+                <?php if (!empty($bento['image_src'])): ?>
+                    <img
+                            src="<?= htmlspecialchars($bento['image_src']) ?>"
+                            alt="Image du bento <?= htmlspecialchars($bento['nom']) ?>"
+                            class="bentoImage"
+                    >
+                <?php else: ?>
+                    <div class="bentoImage placeholder">Image bento</div>
+                <?php endif; ?>
+
+                <figcaption class="floatingActions">
+                    <button class="actionButton saveButton" aria-label="Sauvegarder le bento"></button>
+                    <button class="actionButton sendButton" aria-label="Partager le bento"></button>
+                </figcaption>
+
+            </figure>
+
+            <p class="bentoDescription">
+                <?= nl2br(htmlspecialchars($bento['description'])) ?>
+            </p>
+
+        </section>
+
+        <section class="bentoRecipes" aria-labelledby="bento-recipes-title">
+
+            <h2 id="bento-recipes-title" class="recipesSectionTitle">
+                Recettes du Bento
+            </h2>
+
+            <ul class="bentoRecipesList">
+
+                <?php foreach ($recipes as $recipe): ?>
+                    <li class="bentoRecipeItem">
+
+                        <article class="bentoRecipeCard">
+
+                            <a href="/recettes/view?id=<?= (int)$recipe['id'] ?>" class="bentoRecipeLink">
+
+                                <figure class="recipeThumbnailWrapper">
+                                    <div class="recipeThumbnail"></div>
+                                </figure>
+
+                                <h3 class="recipeName">
+                                    <?= htmlspecialchars($recipe['nom']) ?>
+                                </h3>
+
+                            </a>
+
+                        </article>
+
+                    </li>
+                <?php endforeach; ?>
+
+            </ul>
+
+        </section>
+
+    </section>
+
+    <section class="bentoActions">
+
+        <form method="post" action="/loty/bento/add-to-cart">
+            <input type="hidden" name="id_bento" value="<?= (int)$bento['id'] ?>">
+            <input type="hidden" name="bento_nom" value="<?= $bento['nom'] ?>">
+            <input type="hidden" name="image_src" value="<?= $bento['image_src'] ?? '' ?>">
+
+            <button type="submit" class="mainAddButton">
+                Ajouter au panier
+            </button>
+        </form>
+
+
+    </section>
+
+</main>

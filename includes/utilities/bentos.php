@@ -1,6 +1,5 @@
 <?php
 global $conn;
-
 /*
  * Applique le template d'un item Bento réutilisable partout.
  * */
@@ -8,7 +7,7 @@ function renderBentoItem(string $image, string $title, string $description, stri
 {
     return '
     <a href="/bento/view?id=' . urlencode($id_bento) . '" class="bentoLink">
-        <article class="bentoItem">
+        <article class="bentoItem"  data-title="' . $title . '">
             <img src="' . $image . '" alt="" width="215" height="215" class="bentoImage">
             <div class="bentoInfo">
                 <h3>' . $title . '</h3>
@@ -52,29 +51,39 @@ function generateCommunityBentoLayout($count): string
 {
     global $conn;
 
+    // Ensure session is started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Get user_id with fallback to 0 if not logged in
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
     $bentoLayout = '';
     if ($count === 0) {
         $bento_query = $conn->prepare(
             "SELECT id_bento, bento_nom, description
-         FROM bento
-         WHERE id_user NOT BETWEEN 1 AND 4
-         AND id_user != :user_id
+             FROM bento
+             WHERE id_user NOT BETWEEN 1 AND 4
+             AND id_user != :user_id
              ORDER BY date_creation DESC"
         );
     } else {
         $bento_query = $conn->prepare(
             "SELECT id_bento, bento_nom, description
-         FROM bento
-         WHERE id_user NOT BETWEEN 1 AND 4
-         AND id_user != :user_id
-         ORDER BY date_creation DESC
-         LIMIT :count"
+             FROM bento
+             WHERE id_user NOT BETWEEN 1 AND 4
+             AND id_user != :user_id
+             ORDER BY date_creation DESC
+             LIMIT :count"
         );
         $bento_query->bindValue(':count', $count, PDO::PARAM_INT);
     }
-    $bento_query->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+    $bento_query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
     $bento_query->execute();
     $bento_items = $bento_query->fetchAll();
+
     foreach ($bento_items as $bento) {
         $image = '/assets/img/bento-default.png';
         $title = $bento['bento_nom'];
@@ -113,6 +122,7 @@ function generateTeamBentoLayout($count): string
 
     $bento_query->execute();
     $bento_items = $bento_query->fetchAll();
+
     foreach ($bento_items as $bento) {
         $image = '/assets/img/bento-default.png';
         $title = $bento['bento_nom'];
@@ -162,4 +172,31 @@ function renderRecetteItem(string $image, string $title): string
         </div>
         <img src="assets/icons/chevron-right.svg" alt="" width="auto" height="24" class="chevronIcon">
     </article>';
+}
+
+/*
+ * Ajoute un bento au panier de l'utilisateur.
+ */
+function addBentoToCart(array $bento): void
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $id = (int) $bento['id'];
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['quantity'] += 1;
+    } else {
+        $_SESSION['cart'][$id] = [
+            'id' => $id,
+            'nom' => $bento['nom'],
+            'image' => $bento['image'],
+            'quantity' => 1
+        ];
+    }
 }
