@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .stepButton {
         width: 40px;
         height: 40px;
-        border: 2px solid var(--accent-color, #e84b4b);
+        border: 2px solid var(#e84b4b);
         background: transparent;
-        color: var(--accent-color, #e84b4b);
+        color: var(#e84b4b);
         font-weight: 600;
         border-radius: 6px;
         cursor: pointer;
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .stepButton.active {
-        background-color: var(--accent-color, #e84b4b);
+        background-color: var( #e84b4b);
         color: #ffffff;
     }
 

@@ -124,8 +124,27 @@ body {
     font-family: 'Fivo Sans', sans-serif;
 }
 
+main {
+    min-height: calc(100vh - 200px);
+    max-width: 1140px;
+    margin: 40px auto 0 auto;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+@media (max-width: 768px) {
+    main {
+        min-height: auto;
+    }
+}
+
+main.bentoPage {
+    max-width: none;
+    width: auto;
+}
+
 .blueText {
-    color: #1C9D93;
+    color: #1f7a73;
 }
 
 a {
@@ -153,6 +172,17 @@ p {
     font-weight: normal;
     font-size: 1rem;
     margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+li {
+    margin: 0;
+    padding: 0;
 }
 
 /* Nav */
@@ -223,11 +253,11 @@ nav {
 }
 
 .linkNav:hover {
-    color: #46B3AA;
+    color: #1f7a73;
 }
 
 .active_url_nav {
-    color: #46B3AA;
+    color: #1f7a73;
 }
 
 /* Footer */
@@ -242,7 +272,7 @@ footer {
 }
 
 .brandContent {
-    max-width: 300px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -257,7 +287,7 @@ footer {
 }
 
 .brandContent p {
-    font-size: 1rem;
+    font-size: 1.4rem;
     margin-left: 30px;
     margin-top: 0;
 }
@@ -285,8 +315,8 @@ footer {
 }
 
 .colLinks ul li a {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #F9F2E8;
 }
 
@@ -335,6 +365,22 @@ footer {
     background-color: #df5b5b;
 }
 
+.btn_icon {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn_icon span {
+    margin-top: 3px;
+    font-family: Shrimp, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
 .btn_beige {
     background-color: #F9F2E8;
     color: #E94141;
@@ -342,6 +388,13 @@ footer {
 
 .btn_beige:hover {
     background-color: #f2e4d8;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 /* login/REgister */
@@ -359,6 +412,15 @@ footer {
     padding: 30px;
     border-radius: 25px;
     color: #E94141;
+}
+
+@media (max-width: 768px) {
+    .login_container {
+        min-height: auto;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        padding: 0 30px;
+    }
 }
 
 .login_container p {
@@ -427,6 +489,15 @@ button {
     width: clamp(300px, 90%, 600px);
 }
 
+@media (max-width: 768px) {
+    .registerContainer {
+        min-height: auto;
+        margin-top: 0;
+        margin-bottom: 50px;
+        padding: 0 10px;
+    }
+}
+
 form.registerForm {
     margin-top: 20px;
     font-family: 'SHRIMP', sans-serif;
@@ -487,7 +558,6 @@ form.registerForm {
 /* Bento Header */
 
 .bentoHeader {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -512,10 +582,32 @@ form.registerForm {
     5px 5px 0 #F9F2E8;
 }
 
+.bentoDetailHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin-bottom: 50px;
+}
+
+.bentoDetailHeader h1 {
+    color: #E94141;
+    font-size: 3rem;
+    font-family: 'SHRIMP', sans-serif;
+    line-height: 1;
+}
+
+.bentoDetailHeader p {
+    color: #1f7a73;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Fivo Sans', sans-serif;
+}
+
 /* empty ento section */
 
 .emptyBento {
-    background-color: #1C9D93;
+    background-color: #1f7a73;
     width: clamp(100px, 70%, 700px);
     margin-left: auto;
     margin-right: auto;
@@ -557,7 +649,7 @@ form.registerForm {
 
 .EmptyBentoCard_right {
     flex: 1;
-    color: #1C9D93;
+    color: #1f7a73;
 }
 
 /* Bento de l'équipe */
@@ -720,14 +812,12 @@ form.registerForm {
 
 .bentoGrid {
     display: grid;
-    /* Responsive grid: auto-fit remplira autant de colonnes que possible
-       avec une largeur minimale pour chaque carte, et s'adaptera sur les petits écrans */
     grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
     gap: 2rem;
     width: 100%;
     max-width: 1140px;
     margin: 50px auto 0 auto;
-    align-items: start; /* évite que les cartes aient des hauteurs différemment alignées */
+    align-items: start;
 }
 
 .bentoGrid .large_card {
@@ -743,7 +833,7 @@ form.registerForm {
 }
 
 .recetteGrid {
-    margin : 0 auto;
+    margin: 0 auto;
 }
 
 .recetteLink {
@@ -764,6 +854,352 @@ form.registerForm {
     width: 100%;
     aspect-ratio: 240 / 182;
     border-radius: 0.43rem;
+}
+
+.recipeHeaderContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    align-self: stretch;
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .recipeHeaderContent {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.875rem;
+    }
+
+    .ingredientsColumn {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.recipeVisualColumn {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+}
+
+.recipeImage, .bentoImage {
+    border: 3px solid #E94141;
+}
+
+.recipeTitle, .recipeTitle {
+    color: #E94141;
+    text-align: center;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.floatingActions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+}
+
+.ingredientsColumn {
+    display: flex;
+    width: auto;
+    padding: 1.875rem 2.5625rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.375rem;
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    max-width: 700px;
+}
+
+.ingredientsSectionTitle {
+    color: #E94141;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+ul.ingredientsList {
+    padding: 0.875rem 1.9375rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.625rem;
+}
+
+li.ingredientCard {
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    padding: 0.9375rem 9.9375rem 1.19rem 1.5rem;
+    color: #E94141;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    list-style: none;
+}
+
+.stepTitle {
+    color: #E94141;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.stepDescriptionBox {
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    width: 100%;
+    padding: 1.0625rem 1.875rem;
+
+}
+
+.stepDescriptionBox p {
+    color: #E94141;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.shareContainer {
+    display: none;
+}
+
+.bentoMainContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1.3125rem;
+}
+
+.bentoImage {
+    width: 500px;
+    height: auto;
+}
+
+.bentoRecipes {
+    width: auto;
+}
+
+@media (max-width: 1024px) {
+    .bentoMainContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bentoImage {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .bentoRecipes {
+        width: 100%;
+    }
+}
+
+.navigationAction {
+    padding: 15px 0;
+}
+
+.bentoActions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    padding-top: 2.5rem;
+}
+
+.faceTofaceContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.profileCard {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    gap: 1rem;
+    padding: 20px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    border: 3px solid #E94141;
+    background-color: #F9F2E8;
+    position: relative;
+    color: #E94141;
+}
+
+.profilePicture {
+    border: 3px solid #E94141;
+    border-radius: 2.25rem 2.25rem 0 0;
+    overflow: hidden;
+}
+
+.profileInfo {
+    border: 3px solid #E94141;
+    border-radius: 2.25rem 2.25rem 0 0;
+    overflow: hidden;
+    display: flex;
+    padding: 1.4375rem 1.9375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    flex: 1;
+}
+
+a.editProfileButton, .logoutProfileButton, .removeBentoButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 10px;
+    background-color: #E94141;
+    color: #F9F2E8;
+    text-decoration: none;
+    border-radius: 9px 9px 0 0;
+    margin-top: 15px;
+
+}
+
+.editProfileButton {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.removeBentoButton {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.logoutProfileButton {
+    position: absolute;
+    bottom: 0;
+    right: 70px;
+}
+
+.bentoLayout {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .faceTofaceContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profileCard {
+        flex-direction: column;
+        align-items: start;
+        width: 100%;
+    }
+
+    .profileInfo {
+        width: 100%;
+    }
+
+    .bentoGrid {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+}
+
+.cartBentoCard {
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    display: flex;
+    padding: 1.375rem;
+    justify-content: start;
+    flex-direction: column;
+    position: relative;
+}
+
+.cartBentoName {
+    color: #E94141;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.cartBentoVisual {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 1.25rem;
+}
+
+.cartBentoAuthor {
+    color: #1f7a73;
+    position: absolute;
+    bottom: 3rem;
+    right: 1.375rem;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.ingredientsPreviewList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: .5rem;
+}
+
+.ingredientPreview {
+    border-radius: 0.9375rem 0.9375rem 0 0;
+    background: #E94141;
+    color: #F9F2E8;
+    padding: 0.5rem 1rem;
+    margin-right: 0.625rem;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.cartValidation {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartBentoIngredients h3 {
+    margin: 0;
+    padding: 0;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #E94141;
 }
 
 .sr-only {

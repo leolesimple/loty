@@ -1,3 +1,6 @@
+<?php
+global $conn;
+?>
 <section class="welcomeLoty">
     <img src="/assets/img/LOTY_accueil_baseline.svg" alt="Bienvenue sur le site de LOTY, Lunch of Tomorrow and beYond"
          class="lotyLogo">
@@ -34,7 +37,6 @@
         <h2>
             Il est :
         </h2>
-        <p>
         <ul class="bentoList">
             <li>
                 → prêt à consommer
@@ -49,7 +51,6 @@
                 → Composé de diverses préparations
             </li>
         </ul>
-        </p>
     </div>
 
     <div class="textUpLeft2 withLoty">

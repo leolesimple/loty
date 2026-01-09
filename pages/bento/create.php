@@ -1,11 +1,9 @@
 <?php
 require_once __DIR__ . '/../../includes/utilities/db.php';
-global $conn;
+require_once __DIR__ . '/../../includes/utilities/auth.php';
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(403);
-    exit('Accès refusé');
-}
+check_logged_in();
+global $conn;
 
 $stmt = $conn->query("
     SELECT recette.id_recette, recette.recette_nom, type_recette.nom_type

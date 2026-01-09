@@ -22,7 +22,7 @@
             </li>
             <li><a href="/bento/create">Créer un Bento</a></li>
             <li>
-                <a href="/recette/create">
+                <a href="/recette/add">
                     Proposer une recette
                 </a>
             </li>

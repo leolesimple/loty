@@ -58,41 +58,40 @@ foreach ($recipeData as $row) {
         $steps[$row['num_etape']] = $row['description_etape'];
     }
 }
-
+$recette_image = '/assets/img/recette-default.png';
 ksort($steps);
 
 
 ?>
 
-<main class="recipePageContainer">
+<div class="navigationAction" role="navigation">
+    <a href="/recettes" class="btn btn_red btn_icon">
+        <img src="/assets/icons/chevron-left-white.svg" alt="" style="margin-right: 8px;">
+        <span>Retour</span>
+    </a>
+</div>
 
-    <div class="navigationAction">
-        <button class="backButton" aria-label="Retour">
-            <span class="iconArrowLeft"></span>
-        </button>
-    </div>
+<h1 class="recipeTitle">
+    <?= htmlspecialchars($recipe['recette_nom']) ?>
+</h1>
 
-    <h1 class="recipeTitle">
-        <?= htmlspecialchars($recipe['recette_nom']) ?>
-    </h1>
+<section class="recipeMainContent">
 
-    <section class="recipeMainContent">
-
+    <div class="recipeHeaderContent">
         <div class="recipeVisualColumn">
             <div class="imageWrapper">
-                <div class="recipeImage">Image recette</div>
-
-                <div class="floatingActions">
-                    <button class="actionButton saveButton" aria-label="Sauvegarder">
-                    </button>
-                    <button class="actionButton sendButton" aria-label="Envoyer">
-                    </button>
-                </div>
+                <?= '<img src="' . htmlspecialchars($recette_image) . '" alt="Image de la recette ' . htmlspecialchars($recipe['recette_nom']) . '" class="recipeImage">'; ?>
             </div>
-
-            <p class="recipeShortDescription">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue dolor, fringilla.
-            </p>
+            <div class="floatingActions">
+                <button class="actionButton saveButton" aria-label="Sauvegarder" id="saveRecipeBtn">
+                    <img src="/assets/icons/save.svg" alt="">
+                    <span class="sr-only">Sauvegarder</span>
+                </button>
+                <button class="actionButton sendButton" aria-label="Envoyer" id="sendRecipeBtn">
+                    <img src="/assets/icons/sendBtn.svg" alt="">
+                    <span class="sr-only">Envoyer</span>
+                </button>
+            </div>
         </div>
 
         <div class="ingredientsColumn">
@@ -119,26 +118,45 @@ ksort($steps);
             </ul>
 
         </div>
-    </section>
-
-    <section class="recipeStepsSection">
-        <?php if ($steps): ?>
-            <?php foreach ($steps as $num => $description): ?>
-                <article class="stepContainer">
-                    <h3 class="stepTitle">Étape <?= (int)$num ?></h3>
-                    <div class="stepDescriptionBox">
-                        <p><?= nl2br(htmlspecialchars($description)) ?></p>
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Aucune étape renseignée pour cette recette.</p>
-        <?php endif; ?>
-    </section>
-
-
-    <div class="shareContainer">
-        <button class="mainShareButton">Partager</button>
     </div>
+</section>
 
-</main>
+<section class="recipeStepsSection">
+    <?php if ($steps): ?>
+        <?php foreach ($steps as $num => $description): ?>
+            <article class="stepContainer">
+                <h3 class="stepTitle">Étape <?= (int)$num ?></h3>
+                <div class="stepDescriptionBox">
+                    <p><?= nl2br(htmlspecialchars($description)) ?></p>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucune étape renseignée pour cette recette.</p>
+    <?php endif; ?>
+</section>
+
+
+<div class="shareContainer">
+    <button class="mainShareButton">Partager</button>
+</div>
+<script>
+    document.getElementById('saveRecipeBtn').addEventListener('click', function () {
+        alert('Fonction de sauvegarde de recette à venir !');
+    });
+
+    document.getElementById('sendRecipeBtn').addEventListener('click', function () {
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                url: window.location.href
+            }).then(() => {
+                console.log('Recette partagée avec succès');
+            }).catch((error) => {
+                console.error('Erreur lors du partage de la recette :', error);
+            });
+        } else {
+            alert('Le partage n\'est pas supporté sur ce navigateur.');
+        }
+    });
+</script>

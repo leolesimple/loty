@@ -87,6 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     if ($page === 'home') {
         echo '<link rel="stylesheet" href="/assets/css/home.css">';
     }
+
+    $classMain = '';
+    if ($page === 'bento') {
+        $classMain = 'bentoPage';
+    }
     ?>
     <title>LOTY</title>
 </head>
@@ -96,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <?php include __DIR__ . '/includes/nav.php'; ?>
 </header>
 
-<main id="content">
+<main class="<?= $classMain ?>" id="content">
     <?php
     if (file_exists($file)) {
         require $file;

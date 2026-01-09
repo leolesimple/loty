@@ -3,6 +3,9 @@ global $conn;
 
 require_once __DIR__ . '/../../includes/utilities/db.php';
 require_once __DIR__ . '/../../includes/utilities/bentos.php';
+require_once __DIR__ . '/../../includes/utilities/auth.php';
+
+check_logged_in();
 ?>
 
 <header class="bentoHeader">
