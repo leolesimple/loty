@@ -126,7 +126,7 @@ function generateTeamBentoLayout($count): string
     $bento_items = $bento_query->fetchAll();
 
     foreach ($bento_items as $bento) {
-        $image = '/assets/img/bento-default.png';
+        $image = '/assets/img/bentoVide_default.png';
         $title = $bento['bento_nom'];
         $description = $bento['description'];
         $id_bento = $bento['id_bento'];

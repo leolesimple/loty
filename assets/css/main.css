@@ -1,12 +1,127 @@
-*{
+@font-face {
+    font-family: 'SHRIMP';
+    src: url('/assets/fonts/woff2/Shrimp-Regular.woff2') format('woff2');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- Light (300) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Light-Oblique.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- Regular (400) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Oblique.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- Medium (500) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Medium-Oblique.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- Bold (700) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Bold-Oblique.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- Heavy (800) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Heavy.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Heavy-Oblique.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- Black (900) --- */
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fivo Sans';
+    src: url('/assets/fonts/woff2/FivoSans-Black-Oblique.woff2') format('woff2');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+* {
     box-sizing: border-box;
+}
+
+*:focus {
+    outline: 3px solid #075751;
+    outline-offset: 2px;
 }
 
 body {
     background-color: #F9F2E8;
-    padding: 0;
     margin: 0;
-    padding-top: 170px;
+    padding: 170px 0 0;
+    font-family: 'Fivo Sans', sans-serif;
 }
 
 .blueText {
@@ -18,6 +133,14 @@ a {
     color: #E94141;
 }
 
+h1 {
+    font-family: 'SHRIMP', sans-serif;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    color: #E94141;
+}
+
 h2 {
     font-family: 'SHRIMP', sans-serif;
     font-weight: normal;
@@ -26,25 +149,24 @@ h2 {
 }
 
 p {
-    font-family: 'FivoSans';
+    font-family: 'Fivo Sans', sans-serif;
     font-weight: normal;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0;
 }
 
 /* Nav */
 
 nav {
-    background-color: aqua;
     display: flex;
     flex-direction: column;
     position: fixed;
     width: 100%;
-    top:0;
+    top: 0;
     z-index: 999;
 }
 
-.top_nav{
+.top_nav {
     background-color: #F9F2E8;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -53,7 +175,7 @@ nav {
     padding-right: 30px;
 }
 
-.nav_logo{
+.nav_logo {
     width: auto;
     height: 90px;
     justify-self: center;
@@ -72,15 +194,15 @@ nav {
 .bottom_nav {
     align-items: center;
     padding: 0;
-    font-family: "SHRIMP";
+    font-family: "SHRIMP", sans-serif;
     font-size: 1.5rem;
     color: #E94141;
     width: 100%;
-    height:min-content;
+    height: min-content;
     background-color: #F9F2E8;
 }
 
-.bottom_nav ul{
+.bottom_nav ul {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -89,22 +211,102 @@ nav {
     margin: 0;
 }
 
-.bottom_nav li{
+.bottom_nav li {
     margin-left: 3%;
     margin-right: 3%;
 }
 
-.active_url_nav{
+.linkNav {
+    color: #E94141;
+    padding: 15px;
+    display: inline-block;
+}
+
+.linkNav:hover {
     color: #46B3AA;
+}
+
+.active_url_nav {
+    color: #46B3AA;
+}
+
+/* Footer */
+footer {
+    background-color: #E94141;
+    padding: 50px 0;
+    color: #F9F2E8;
+    font-family: 'Fivo Sans', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.brandContent {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.brandContent h2 {
+    font-family: 'SHRIMP', sans-serif;
+    font-weight: normal;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    margin-left: 30px;
+}
+
+.brandContent p {
+    font-size: 1rem;
+    margin-left: 30px;
+    margin-top: 0;
+}
+
+.rowLinks {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.colLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.colLinks ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.colLinks ul li {
+    margin-bottom: 10px;
+}
+
+.colLinks ul li a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #F9F2E8;
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .rowLinks {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 /* Buttons */
 
 .btn {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px 30px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     font-family: 'SHRIMP', sans-serif;
@@ -112,7 +314,16 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 300px;
+}
+
+.btn span {
+    color: #FFF;
+    text-align: center;
+    font-family: Shrimp, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .btn_red {
@@ -120,47 +331,73 @@ nav {
     color: #F9F2E8;
 }
 
+.btn_red:hover {
+    background-color: #df5b5b;
+}
+
 .btn_beige {
     background-color: #F9F2E8;
     color: #E94141;
 }
 
-/* login */
+.btn_beige:hover {
+    background-color: #f2e4d8;
+}
+
+/* login/REgister */
 
 .login_container {
-    width: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: clamp(300px, 90%, 600px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    min-height: 900px;
+    padding: 30px;
+    border-radius: 25px;
     color: #E94141;
 }
 
 .login_container p {
-    color: black;
+    color: #000;
 }
 
 .login_container a {
     font-weight: bold;
 }
 
-.login_form{
+.login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
     margin-top: 20px;
     font-family: 'SHRIMP', sans-serif;
+}
+
+.login_form label {
+    margin-top: 15px;
+    color: #E94141;
+    display: block;
 }
 
 .login_form input {
     background-color: #F9F2E8;
     border: solid 1px #E94141;
-    border-radius: 15px;
+    border-radius: 15px 15px 0 0;
     height: 40px;
     width: 100%;
-    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    color: #000;
 }
 
-.remember_me{
-    font-family: 'FivoSans', sans-serif;
+.remember_me {
+    font-family: 'Fivo Sans', sans-serif;
     font-weight: normal;
     font-size: 0.8rem;
     display: flex;
@@ -170,8 +407,7 @@ nav {
 .remember_me input[type="checkbox"] {
     width: 15px;
     height: 15px;
-    margin: 0;
-    margin-right: 5px;
+    margin: 0 5px 0 0;
 }
 
 button {
@@ -179,17 +415,88 @@ button {
     margin-left: auto;
 }
 
+.registerContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    min-height: 400px;
+    padding: 30px;
+    border-radius: 25px;
+    width: clamp(300px, 90%, 600px);
+}
+
+form.registerForm {
+    margin-top: 20px;
+    font-family: 'SHRIMP', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.registerForm > .input-group > label {
+    margin-top: 15px;
+    color: #E94141;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.input-group input, textarea {
+    background-color: #F9F2E8;
+    border: solid 1px #E94141;
+    border-radius: 15px 15px 0 0;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    color: #000;
+}
+
+.input-group input[type='file'] {
+    border: none;
+    padding: 5px;
+    height: auto;
+}
+
+.input-group input[type='file']::-webkit-file-upload-button {
+    background-color: #E94141;
+    color: #F9F2E8;
+    border: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 10px 30px;
+    font-family: 'SHRIMP', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.input-group input[type='file']::-webkit-file-upload-button:hover {
+    background-color: #df5b5b;
+}
+
 /* Bento Header */
 
 .bentoHeader {
     position: relative;
     display: flex;
+    flex-direction: column;
+    gap: 50px;
     align-items: center;
     justify-content: center;
 }
 
-.bentoHeader img{
-    width: clamp(100px,80%,800px);
+.bentoHeader img {
+    width: clamp(100px, 80%, 800px);
     display: block;
 }
 
@@ -199,11 +506,10 @@ button {
     font-size: 3rem;
     font-family: 'SHRIMP', sans-serif;
     text-align: center;
-    text-shadow:
-        -5px -5px 0 #F9F2E8,
-         5px -5px 0 #F9F2E8,
-        -5px  5px 0 #F9F2E8,
-         5px  5px 0 #F9F2E8;
+    text-shadow: -5px -5px 0 #F9F2E8,
+    5px -5px 0 #F9F2E8,
+    -5px 5px 0 #F9F2E8,
+    5px 5px 0 #F9F2E8;
 }
 
 /* empty ento section */
@@ -216,14 +522,14 @@ button {
     margin-top: 100px;
     padding: 20px;
     padding-left: 30px;
-    gap:20px;
+    gap: 20px;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     display: flex;
     height: 200px;
     align-items: center;
     color: #F9F2E8;
-    font-family: 'FivoSans', sans-serif;
+    font-family: 'Fivo Sans', sans-serif;
 }
 
 .EmptyBentoCard {
@@ -236,7 +542,17 @@ button {
 }
 
 .EmptyBentoCard_left {
+    padding: 5px;
     flex: 1;
+}
+
+.EmptyBentoCard_left img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: auto;
+
 }
 
 .EmptyBentoCard_right {
@@ -257,7 +573,9 @@ button {
 
 .teamBento_left {
     color: #F9F2E8;
-    width: fit-content;
+    max-width: 400px;
+    flex: 1;
+    margin-right: 50px;
 }
 
 .teamBento_left h2 {
@@ -267,16 +585,18 @@ button {
 }
 
 .teamBento_left p {
-    font-family: 'FivoSans',sans-serif;
-    font-weight: 'regular';
+    font-family: 'Fivo Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin-bottom: .75rem;
 }
 
 .teamBento_right {
     flex: 3;
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     justify-content: space-evenly;
-    max-width: 900px;
+    max-width: 1140px;
 }
 
 
@@ -311,12 +631,13 @@ button {
     height: 100%;
     background-color: gray;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 10px;
 }
 
-.topCard h3{
+.topCard h3 {
     background-color: #F9F2E8;
-    width:fit-content;
+    width: fit-content;
     position: absolute;
     bottom: 0;
     margin: 0;
@@ -329,15 +650,120 @@ button {
 }
 
 .bottomCard {
+    margin-top: 10px;
     flex: 1;
 }
 
-/* Footer */
+.bottomCard p {
+    font-family: 'Fivo Sans', sans-serif;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
 
-footer {
-    margin-top: 100px;
-    background-color: #E94141;
-    padding: 200px;
+.communityBento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 11.8125rem 0
+}
+
+.bentoSectionHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    align-self: stretch;
+    max-width: 375px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.recettesSectionHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1140px;
+    padding: 0 2rem;
+    width: 100%;
+    margin: 60px auto 10px auto;
+}
+
+.recettesSectionHeader h2 {
+    color: #E94141;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.teamBentoTitle {
+    color: #E94141;
+    text-align: center;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3rem;
+}
+
+.bentoSectionHeader p {
+    color: #E94141;
+    text-align: center;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.bentoGrid {
+    display: grid;
+    /* Responsive grid: auto-fit remplira autant de colonnes que possible
+       avec une largeur minimale pour chaque carte, et s'adaptera sur les petits écrans */
+    grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1140px;
+    margin: 50px auto 0 auto;
+    align-items: start; /* évite que les cartes aient des hauteurs différemment alignées */
+}
+
+.bentoGrid .large_card {
+    height: auto;
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    width: 100%;
+}
+
+.bentoGrid .large_card .large_card_info {
+    width: 100%;
+}
+
+.recetteGrid {
+    margin : 0 auto;
+}
+
+.recetteLink {
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    padding: 1.875rem;
+}
+
+.recetteItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3125rem;
+}
+
+.recetteImage {
+    width: 100%;
+    aspect-ratio: 240 / 182;
+    border-radius: 0.43rem;
 }
 
 .sr-only {
@@ -350,17 +776,4 @@ footer {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0
-}
-
-/* Fonts */
-
-@font-face {
-    font-family: 'SHRIMP';
-    src: url(../fonts/SHRIMP.ttf);
-}
-
-@font-face {
-    font-family: 'FivoSans';
-    src: url(../fonts/FivoSans-Regular.otf);
-    font-weight: 'regular';
 }

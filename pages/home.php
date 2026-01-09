@@ -124,4 +124,15 @@
             bentoVide.classList.remove('step3');
         }
     });
+
+    window.addEventListener('scroll', () => {
+        const lotyLogoTop = lotyLogo.getBoundingClientRect().top;
+        const viewportHeight = window.innerHeight;
+
+        if (lotyLogoTop < viewportHeight * -1.95) {
+            bentoVide.classList.add('step4');
+        } else {
+            bentoVide.classList.remove('step4');
+        }
+    });
 </script>
