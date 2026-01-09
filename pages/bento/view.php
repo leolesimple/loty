@@ -1,6 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../../includes/utilities/db.php';
+require_once __DIR__ . '/../../includes/utilities/auth.php';
+
+check_logged_in();
 global $conn;
 
 if (!isset($_GET['id'])) {
@@ -49,137 +52,131 @@ foreach ($bentoData as $row) {
         ];
     }
 }
+
+$bento_image = '/assets/img/bentoVide_default.png';
+
 ?>
-<main class="bentoPageContainer">
+<div class="navigationAction" role="navigation">
+    <a href="/bento" class="btn btn_red btn_icon">
+        <img src="/assets/icons/chevron-left-white.svg" alt="" style="margin-right: 8px;">
+        <span>Retour</span>
+    </a>
+</div>
 
-    <nav class="navigationAction" aria-label="Navigation secondaire">
-        <a href="/bento" class="backButton" aria-label="Retour à la liste des bentos">
-            <span class="iconArrowLeft"></span>
-        </a>
-    </nav>
+<header class="bentoDetailHeader">
+    <h1 class="bentoTitle">
+        <?= htmlspecialchars($bento['nom']) ?>
+    </h1>
+    <p class="bentoDescription">
+        <?= nl2br(htmlspecialchars($bento['description'])) ?>
+    </p>
+</header>
 
-    <header class="bentoHeader">
+<section class="bentoMainContent">
 
-        <h1 class="bentoTitle">
-            <?= htmlspecialchars($bento['nom']) ?>
-        </h1>
+    <section class="bentoIdentity">
 
-    </header>
-
-    <section class="bentoMainContent">
-
-        <section class="bentoIdentity">
-
-            <figure class="bentoImageWrapper">
-
-                <?php if (!empty($bento['image_src'])): ?>
-                    <img
-                            src="<?= htmlspecialchars($bento['image_src']) ?>"
-                            alt="Image du bento <?= htmlspecialchars($bento['nom']) ?>"
-                            class="bentoImage"
-                    >
-                <?php else: ?>
-                    <div class="bentoImage placeholder">Image bento</div>
-                <?php endif; ?>
-
-                <figcaption class="floatingActions">
-                    <button class="actionButton saveButton" aria-label="Sauvegarder le bento"></button>
-                    <button class="actionButton sendButton" aria-label="Partager le bento"></button>
-                </figcaption>
-
-            </figure>
-
-            <p class="bentoDescription">
-                <?= nl2br(htmlspecialchars($bento['description'])) ?>
-            </p>
-
-        </section>
-
-        <section class="bentoRecipes" aria-labelledby="bento-recipes-title">
-
-            <h2 id="bento-recipes-title" class="recipesSectionTitle">
-                Recettes du Bento
-            </h2>
-
-            <ul class="bentoRecipesList">
-
-                <?php foreach ($recipes as $recipe): ?>
-                    <li class="bentoRecipeItem">
-
-                        <article class="bentoRecipeCard">
-
-                            <a href="/recettes/view?id=<?= (int)$recipe['id'] ?>" class="bentoRecipeLink">
-
-                                <figure class="recipeThumbnailWrapper">
-                                    <div class="recipeThumbnail"></div>
-                                </figure>
-
-                                <h3 class="recipeName">
-                                    <?= htmlspecialchars($recipe['nom']) ?>
-                                </h3>
-
-                            </a>
-
-                        </article>
-
-                    </li>
-                <?php endforeach; ?>
-
-            </ul>
-
-        </section>
+        <div class="recipeVisualColumn">
+            <div class="imageWrapper">
+                <?= '<img src="' . htmlspecialchars($bento_image) . '" alt="" class="bentoImage" width="800">'; ?>
+            </div>
+            <div class="floatingActions">
+                <button class="actionButton saveButton" aria-label="Sauvegarder" id="saveRecipeBtn">
+                    <img src="/assets/icons/save.svg" alt="">
+                    <span class="sr-only">Sauvegarder</span>
+                </button>
+                <button class="actionButton sendButton" aria-label="Envoyer" id="sendRecipeBtn">
+                    <img src="/assets/icons/sendBtn.svg" alt="">
+                    <span class="sr-only">Envoyer</span>
+                </button>
+            </div>
+        </div>
 
     </section>
 
-    <section class="bentoActions">
+    <section class="bentoRecipes" aria-labelledby="bento-recipes-title">
 
-        <form method="post" class="addToCartForm">
-            <input type="hidden" name="add_to_cart" value="1">
-            <input type="hidden" name="bento_id" value="<?= (int)$bento['id'] ?>">
-            <input type="hidden" name="bento_nom" value="<?= htmlspecialchars($bento['nom']) ?>">
+        <h2 id="bento-recipes-title" class="recipesSectionTitle">
+            Recettes du Bento
+        </h2>
 
-            <button type="submit" class="mainAddButton">
-                Ajouter au panier
-            </button>
-        </form>
+        <ul class="bentoRecipesList">
 
-        <span class="cartFeedback" aria-live="polite"></span>
+            <?php foreach ($recipes as $recipe): ?>
+                <li class="bentoRecipeItem">
+
+                    <article class="bentoRecipeCard">
+
+                        <a href="/recettes/view?id=<?= (int)$recipe['id'] ?>" class="bentoRecipeLink">
+
+                            <figure class="recipeThumbnailWrapper">
+                                <div class="recipeThumbnail"></div>
+                            </figure>
+
+                            <h3 class="recipeName">
+                                <?= htmlspecialchars($recipe['nom']) ?>
+                            </h3>
+
+                        </a>
+
+                    </article>
+
+                </li>
+            <?php endforeach; ?>
+
+        </ul>
 
     </section>
-    <script>
-        const form = document.querySelector(".addToCartForm")
-        const feedback = document.querySelector(".cartFeedback")
 
-        if (form) {
-            form.addEventListener("submit", async (event) => {
-                event.preventDefault()
+</section>
 
-                const response = await fetch(window.location.href, {
-                    method: "POST",
-                    body: new FormData(form),
-                    headers: {
-                        "Accept": "application/json"
-                    }
-                })
+<section class="bentoActions">
 
-                const text = await response.text()
+    <form method="post" class="addToCartForm">
+        <input type="hidden" name="add_to_cart" value="1">
+        <input type="hidden" name="bento_id" value="<?= (int)$bento['id'] ?>">
+        <input type="hidden" name="bento_nom" value="<?= htmlspecialchars($bento['nom']) ?>">
 
-                try {
-                    const data = JSON.parse(text)
+        <button type="submit" class="btn btn_red">
+            Ajouter au panier
+        </button>
+    </form>
 
-                    if (data.status === "ok") {
-                        feedback.textContent = "Ajouté au panier (x" + data.quantity + ")"
-                    } else {
-                        feedback.textContent = "Erreur lors de l’ajout."
-                    }
-                } catch (e) {
-                    console.error("Réponse invalide :", text);
-                    alert("Le serveur a renvoyé ceci au lieu du JSON :\n\n" + text);
-                    feedback.textContent = "Erreur technique."
+    <a href="/bento/perso?id=<?= $bento['id'] ?>" class="btn btn_beige">Personnaliser</a>
+    <span class="cartFeedback" aria-live="polite"></span>
+
+</section>
+<script>
+    const form = document.querySelector(".addToCartForm")
+    const feedback = document.querySelector(".cartFeedback")
+
+    if (form) {
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault()
+
+            const response = await fetch(window.location.href, {
+                method: "POST",
+                body: new FormData(form),
+                headers: {
+                    "Accept": "application/json"
                 }
             })
-        }
-    </script>
 
+            const text = await response.text()
 
-</main>
+            try {
+                const data = JSON.parse(text)
+
+                if (data.status === "ok") {
+                    feedback.textContent = "Ajouté au panier (x" + data.quantity + ")"
+                } else {
+                    feedback.textContent = "Erreur lors de l’ajout."
+                }
+            } catch (e) {
+                console.error("Réponse invalide :", text);
+                alert("Le serveur a renvoyé ceci au lieu du JSON :\n\n" + text);
+                feedback.textContent = "Erreur technique."
+            }
+        })
+    }
+</script>

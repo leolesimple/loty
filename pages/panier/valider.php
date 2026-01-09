@@ -1,6 +1,8 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../includes/utilities/db.php';
+require_once __DIR__ . '/../../includes/utilities/auth.php';
+
+check_logged_in();
 global $conn;
 
 if (empty($_SESSION['cart'])) {

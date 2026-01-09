@@ -42,28 +42,13 @@ $profileCardTemplate = '
             <img src="/assets/icons/pen.svg" alt="" width="24" height="24">
             <span class="sr-only">Éditer le profil</span>
         </a>
-        <a class="editProfileButton" href="/logout">
+        <a class="logoutProfileButton" href="/logout">
             <img src="/assets/icons/logout.svg" alt="" width="24" height="24">
             <span class="sr-only">Se déconnecter</span>
         </a>
     </section>';
 
 ?>
-<main>
-    <style>
-        a.editProfileButton {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 10px;
-            background-color: #E94141;
-            color: #F9F2E8;
-            text-decoration: none;
-            border-radius: 9px 9px 0 0;
-            margin-top: 15px;
-
-        }
-    </style>
     <h1>Mon Profil</h1>
     <p>Nom d'utilisateur : <?php echo clean($_SESSION['username']); ?></p>
     <?php echo $profileCardTemplate; ?>
@@ -73,7 +58,6 @@ $profileCardTemplate = '
                 <div class="bentoCol">
                     <h2>Mes créations Bento</h2>
                     <?php echo generateUserBentoLayout(3); ?>
-                    <!--Voir plus de bento-->
                     <a class="seeMoreButton" href="/profil/bento">
                         <span>Voir plus de Bento</span>
                     </a>
@@ -100,4 +84,3 @@ $profileCardTemplate = '
             </div>
         </div>
     </div>
-</main>

@@ -2,7 +2,7 @@
     <div class="top_nav">
         <div></div>
         <a href="/">
-            <img src="../assets/img/LOTY_Logo.svg" class="nav_logo">
+            <img src="../assets/img/LOTY_Logo.svg" class="nav_logo" alt="Revenir à l'accueil">
             <span class="sr-only">Aller à l'accueil</span>
         </a>
         
