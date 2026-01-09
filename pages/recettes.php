@@ -13,46 +13,53 @@ require_once __DIR__ . '/../includes/utilities/recipes.php';
     <h1>
         Les <span class="blueText">Recettes</span> !
     </h1>
-    <a href="/recettes/add" class="bentoButton">
-        <img src="/assets/icons/plus-white.svg" alt="" width="24" height="24">
+    <a href="/recettes/add" class="btn btn_red">
         Ajouter une recette
     </a>
 </header>
 
 <section class="recettesContainer">
-    <header class="bentoSectionHeader">
+    <header class="recettesSectionHeader">
         <h2>Entrées</h2>
     </header>
 
-    <section class="bentoGrid">
+    <section class="bentoGrid recetteGrid">
         <?php echo generateRecetteLayout(6, 1); ?>
-        <a href="/recettes/viewAll?type=1" class="seeAllLink">
+        <a href="/recettes/viewAll?type=1" class="btn btn_red">
             Voir toutes les entrées
-            <img src="/assets/icons/chevron-right.svg" alt="" width="auto" height="24" class="chevronIcon">
         </a>
     </section>
 
-    <section class="bentoGrid">
-        <header class="bentoSectionHeader">
-            <h2>Plats</h2>
-        </header>
+    <header class="recettesSectionHeader">
+        <h2>Plats</h2>
+    </header>
+    <section class="bentoGrid recetteGrid">
 
         <?php echo generateRecetteLayout(6, 2); ?>
-        <a href="/recettes/viewAll?type=2" class="seeAllLink">
+        <a href="/recettes/viewAll?type=2" class="btn btn_red">
             Voir tous les plats
-            <img src="/assets/icons/chevron-right.svg" alt="" width="auto" height="24" class="chevronIcon">
         </a>
     </section>
 
-    <section class="bentoGrid">
-        <header class="bentoSectionHeader">
-            <h2>Desserts</h2>
-        </header>
+    <header class="recettesSectionHeader">
+        <h2>Accompagnements</h2>
+    </header>
 
+    <section class="bentoGrid recetteGrid">
         <?php echo generateRecetteLayout(6, 3); ?>
-        <a href="/recettes/viewAll?type=3" class="seeAllLink">
+        <a href="/recettes/viewAll?type=3" class="btn btn_red">
+            Voir tous les accompagnements
+        </a>
+    </section>
+
+    <header class="recettesSectionHeader">
+        <h2>Desserts</h2>
+    </header>
+
+    <section class="bentoGrid recetteGrid">
+        <?php echo generateRecetteLayout(6, 4); ?>
+        <a href="/recettes/viewAll?type=3" class="btn btn_red">
             Voir tous les desserts
-            <img src="/assets/icons/chevron-right.svg" alt="" width="auto" height="24" class="chevronIcon">
         </a>
     </section>
 </section>

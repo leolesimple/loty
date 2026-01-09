@@ -7,7 +7,6 @@
         </a>
         
         <div class="nav_actions">
-            <a href="/auth/profil.php"><img src="../assets/icons/accounts-icon.svg" class="profile_icon"></a>
             <?php
         if (isset($_SESSION['user_id'])) {
             echo '<a href="/profil">
@@ -24,8 +23,8 @@
                     <p class="button-text">Panier</p>
                   </a>';
         } else {
-            echo '<a href="/login" class="nav-button-link">
-                    <p class="button-text">S\'identifier</p>
+            echo '<a href="/login" class="btn btn_red">
+                    S\'identifier
                   </a>';
         }
         ?>
@@ -33,10 +32,10 @@
     </div>
     <div class="bottom_nav">
         <ul>
-            <li><a>ACCUEIL</a></li>
-            <li><a class="blueText">BENTO</a></li>
-            <li><a>RECETTES</a></li>
-            <li><a>PODIUM</a></li>
+            <li><a class="linkNav" href="/">ACCUEIL</a></li>
+            <li><a class="linkNav" href="/bento">BENTO</a></li>
+            <li><a class="linkNav" href="/recettes">RECETTES</a></li>
+            <li><a class="linkNav" href="/podium" aria-disabled="true">PODIUM</a></li>
         </ul>
     </div>
 </nav>

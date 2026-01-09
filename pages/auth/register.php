@@ -60,44 +60,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
-<h1>Nous Rejoindre</h1>
-<p>On se connaît déjà ? <a href="/login">Connectez-vous</a></p>
-<form action="" method="POST" enctype="multipart/form-data" class="form-register">
-    <div class="input-group">
-        <label for="nom">Nom de famille :</label>
-        <input type="text" id="nom" name="nom" placeholder="Dupont" required>
-    </div>
-    <div class="input-group">
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" placeholder="Jean" required>
-    </div>
-    <div class="input-group">
-        <label for="bio">Bio :</label>
-        <textarea name="bio" id="bio" placeholder="Parlez-nous de vous..." required></textarea>
-    </div>
-    <div class="input-group">
-        <label for="photo">Télécharger une photo de profil :</label>
-        <input type="file" id="photo" name="photo" accept="image/*" required>
-    </div>
-    <div class="input-group">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" placeholder="johndoe" required>
-    </div>
-    <div class="input-group">
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" placeholder="email@domain.net" required>
-    </div>
-    <div class="input-group">
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
-    </div>
-    <div class="input-group">
-        <label for="password_confirm">Confirmation du mot de passe :</label>
-        <input type="password" id="password_confirm" name="password_confirm" placeholder="Confirmez votre mot de passe"
-               required>
-    </div>
-    <div class="input-group">
-        <button type="submit" class="btn">S'inscrire</button>
-    </div>
-</form>
+<section class="registerContainer">
+    <h1>Nous Rejoindre</h1>
+    <p>On se connaît déjà ? <a href="/login">Connectez-vous</a></p>
+    <form action="" method="POST" enctype="multipart/form-data" class="registerForm">
+        <div class="input-group">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" placeholder="johndoe" required>
+        </div>
+        <div class="input-group">
+            <label for="nom">Nom de famille :</label>
+            <input type="text" id="nom" name="nom" placeholder="Dupont" required>
+        </div>
+        <div class="input-group">
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Jean" required>
+        </div>
+        <div class="input-group">
+            <label for="bio">Bio :</label>
+            <textarea name="bio" id="bio" placeholder="Parlez-nous de vous..." required></textarea>
+        </div>
+        <div class="input-group">
+            <label for="photo">Télécharger une photo de profil :</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" placeholder="email@domain.net" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+        </div>
+        <div class="input-group">
+            <label for="password_confirm">Confirmation du mot de passe :</label>
+            <input type="password" id="password_confirm" name="password_confirm"
+                   placeholder="Confirmez votre mot de passe"
+                   required>
+        </div>
+        <div class="input-group">
+            <button type="submit" class="btn btn_red">S'inscrire</button>
+        </div>
+    </form>
+</section>
