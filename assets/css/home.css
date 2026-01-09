@@ -1,0 +1,229 @@
+.welcomeLoty {
+    display: flex;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    height: 100vh;
+    padding: 10rem 16rem 12.75rem 16.0625rem;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .welcomeLoty {
+        padding: 5rem 8rem 6.375rem 8.03125rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .welcomeLoty {
+        padding: 2rem 4rem 3.1875rem 4.03125rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .welcomeLoty {
+        padding: 1rem 2rem 1.59375rem 2.015625rem;
+    }
+}
+
+@media (max-width: 300px) {
+    .welcomeLoty {
+        padding: 0.5rem 1rem 0.796875rem 1.0078125rem;
+    }
+}
+
+.welcomeLoty img:not(.bentoVide) {
+    width: 100%;
+    height: auto;
+}
+
+.bentoVide {
+    position: fixed;
+    bottom: -30%;
+    right: 50%;
+    transform: rotate(0deg) translate(50%, 0);
+    width: 750px;
+    transition: all 2s cubic-bezier(0.49, -0.01, 0.07, 0.99) !important;
+    transform-origin: center !important;
+    z-index: 999;
+}
+
+.bentoVide.step1 {
+    transform: rotate(23deg) translate(-69%, -27%);
+    top: 50%;
+    left: 50%;
+}
+
+.bentoVide.step2 {
+    transform: rotate(90deg) translate(-50%, -50%);
+    top: 50%;
+    left: 16%;
+}
+
+.bentoVide.step3 {
+    transform: rotate(0deg) translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+section.content {
+    position: relative;
+    height: 180rem;
+}
+
+section > div {
+    max-width: 400px;
+}
+
+section > div > h2 {
+    color: #E94141;
+    font-family: Shrimp, sans-serif;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+section > div > p {
+    color: #E94141;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textLotyRight {
+    position: absolute;
+    top: 40rem;
+    right: 1rem;
+}
+
+.explBento {
+    position: absolute;
+    top: 50rem;
+    left: 0;
+}
+
+.explBento2 {
+    position: absolute;
+    top: 75rem;
+    right: 0;
+}
+
+.textLotyRight p {
+    font-family: "SHRIMP", sans-serif;
+    font-size: 2.35rem;
+    max-width: 350px;
+}
+
+.textHeIs {
+    position: absolute;
+    top: 100rem;
+    left: 0;
+}
+
+.bentoList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bentoList li {
+    color: #E94141;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: .95rem;
+    line-height: .5rem;
+    margin-bottom: 1rem;
+}
+
+.textHeIs h2 {
+    color: #1C9D93;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textUpLeft2 {
+    position: absolute;
+    top: 130rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.withLoty h2 {
+    color: #E94141;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 2.95rem;
+}
+
+.textColLeft1 {
+    max-width:300px;
+    position: absolute;
+    top: 140rem;
+    left: 20px;
+}
+
+.textColRight1 {
+    max-width:300px;
+    position: absolute;
+    top: 150rem;
+    right: 20px;
+}
+
+.textColLeft2 {
+    max-width:300px;
+    position: absolute;
+    top: 165rem;
+    left: 20px;
+}
+
+.textColRight2 {
+    max-width:300px;
+    position: absolute;
+    top: 175rem;
+    right: 20px;
+}
+
+.joinLoty {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 4rem;
+}
+
+@media (max-width: 600px) {
+    .bentoVide {
+        width: 300px !important;
+    }
+
+    .textUpLeft1
+    .textLotyRight,
+    .explBento,
+    .explBento2,
+    .textHeIs,
+    .textUpLeft2,
+    .textColLeft1,
+    .textColRight1,
+    .textColLeft2,
+    .textColRight2 {
+        position: static;
+        transform: none;
+        max-width: 100%;
+        margin-bottom: 4rem;
+        top: auto;
+        left: auto;
+        right: auto;
+    }
+}
