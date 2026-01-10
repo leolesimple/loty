@@ -40,22 +40,16 @@ define('BASE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
 
 <meta property="og:locale" content="fr_FR">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{OG_TITLE}}">
-<meta property="og:description" content="{{OG_DESCRIPTION}}">
-<meta property="og:url" content="{{PAGE_URL}}">
-<meta property="og:site_name" content="{{SITE_TITLE}}">
-<meta property="og:image" content="{{OG_IMAGE_URL}}">
-<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
+<meta property="og:title" content="LOTY">
+<meta property="og:description" content="Avec LOTY : Explorez une sélection de Bento et de recettes. Ajoutez-les à votre panier, personnalisez les et générez votre liste de courses. Partagez vos créations Bento. Parcourez les Bento de la communautés et votez pour vos favoris.">
+<meta property="og:url" content="https://loty.leolesimple.fr/">
+<meta property="og:site_name" content="LOTY">
+<meta property="og:image" content="https://loty.leolesimple.fr/assets/img/og-image.png">
+<meta property="og:image:alt" content="LOTY - Votre plateforme de Bento personnalisés">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/icons/favicon.ico">
-<link rel="shortcut icon" href="/assets/icons/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-<meta name="msapplication-TileColor" content="#F9F2E8">
-<meta name="msapplication-TileImage" content="/assets/icons/mstile-150x150.png">
+<link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/assets/img/favicon.ico">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
