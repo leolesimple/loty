@@ -23,174 +23,113 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-<style>
-    .stepSelector {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 24px;
-    }
+<nav class="navigationAction" aria-label="Navigation secondaire">
+    <a href="/recettes" class="backButton" aria-label="Retour aux recettes">
+        <span class="iconArrowLeft"></span>
+    </a>
+</nav>
 
-    .stepButton {
-        width: 40px;
-        height: 40px;
-        border: 2px solid var(#e84b4b);
-        background: transparent;
-        color: var(#e84b4b);
-        font-weight: 600;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
+<header class="addRecipeHeader">
+    <h1>Ajouter ma recette</h1>
+</header>
 
-    .stepButton:hover,
-    .stepButton:focus-visible {
-        background-color: rgba(232, 75, 75, 0.1);
-        outline: none;
-    }
+<form method="post" action="" id="addRecipeForm">
 
-    .stepButton.active {
-        background-color: var( #e84b4b);
-        color: #ffffff;
-    }
+    <section class="recipeIdentity">
 
-    .stepsContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+        <div class="formField">
+            <label for="recette_nom">Nom</label>
+            <input type="text" id="recette_nom" name="recette_nom" required aria-required="true">
+            <span class="error" id="nameError" aria-live="polite"></span>
+        </div>
 
-    .stepField {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
+        <div class="formField">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" required aria-required="true"></textarea>
+            <span class="error" id="descriptionError" aria-live="polite"></span>
+        </div>
 
-    .stepField label {
-        font-weight: 600;
-        color: var(--accent-color, #e84b4b);
-    }
+    </section>
 
-    .stepField textarea {
-        resize: vertical;
-        min-height: 90px;
-        padding: 12px;
-        border-radius: 10px;
-        border: 2px solid var(--accent-color, #e84b4b);
-        background-color: transparent;
-        font-family: inherit;
-        font-size: 1rem;
-    }
-
-    .stepField textarea:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(232, 75, 75, 0.25);
-    }
-
-    .stepField textarea[aria-invalid="true"] {
-        border-color: #b00020;
-    }
-
-</style>
-<main class="addRecipePage">
-
-    <nav class="navigationAction" aria-label="Navigation secondaire">
-        <a href="/recettes" class="backButton" aria-label="Retour aux recettes">
-            <span class="iconArrowLeft"></span>
-        </a>
-    </nav>
-
-    <header class="addRecipeHeader">
-        <h1>Ajouter ma recette</h1>
-    </header>
-
-    <form method="post" action="" id="addRecipeForm" novalidate>
-
-        <section class="recipeIdentity">
-
-            <div class="formField">
-                <label for="recette_nom">Nom</label>
-                <input type="text" id="recette_nom" name="recette_nom" required aria-required="true">
-                <span class="error" id="nameError" aria-live="polite"></span>
-            </div>
-
-            <div class="formField">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="3" required aria-required="true"></textarea>
-                <span class="error" id="descriptionError" aria-live="polite"></span>
-            </div>
-
-        </section>
-
-        <section class="ingredientsSection">
-            <h2>Ingrédients</h2>
-
-            <ul class="ingredientsList" id="ingredientsList">
-                <li class="ingredientRow">
-
-                    <label class="sr-only" for="ingredient_0">Ingrédient</label>
+    <section class="ingredientsSection">
+        <h2>Ingrédients</h2>
+        <ul class="ingredientsList" id="ingredientsList">
+            <li class="ingredientRow">
+                    <span class="ingredientSelectWrapper">
+                    <label class="" for="ingredient_0">Ingrédient</label>
                     <select name="ingredients[0][id_ingredient]" id="ingredient_0" class="ingredientSelect">
+                        <optgroup label="Nouveaux ingrédients">
                         <option value="">Choisir un ingrédient</option>
+                        <option value="new">+ Ajouter un nouvel ingrédient</option>
+                        </optgroup>
+                        <optgroup label="Ingrédients existants">
                         <?php foreach ($ingredientsList as $ingredient): ?>
                             <option value="<?= $ingredient['id_ingredient'] ?>">
                                 <?= htmlspecialchars($ingredient['nom']) ?>
                             </option>
                         <?php endforeach; ?>
-                        <option value="new">+ Ajouter un nouvel ingrédient</option>
+                        </optgroup>
                     </select>
+                    </span>
 
+                <div class="input-group">
+                    <label for="new_ingredient_0" hidden="hidden" aria-hidden="true">Nom du nouvel ingrédient</label>
                     <input
                             type="text"
                             name="ingredients[0][new_nom]"
+                            id="new_ingredient_0"
                             class="newIngredientInput"
                             placeholder="Nom du nouvel ingrédient"
                             hidden
                     >
+                </div>
+                <div class="qty-group">
+                    <div class="input-group fullSize">
+                        <label class="" for="quantite_0">Quantité</label>
+                        <input type="number" step="any" name="ingredients[0][quantite]" id="quantite_0"
+                               class="ingredientInput">
+                    </div>
+                    <div class="input-group">
+                        <label class="" for="unite_0">Unité</label>
+                        <select name="ingredients[0][id_unite]" id="unite_0" class="ingredientSelect">
+                            <option value="">Unité</option>
+                            <?php foreach ($unitesList as $unite): ?>
+                                <option value="<?= $unite['id_unites'] ?>">
+                                    <?= htmlspecialchars($unite['unites']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
 
-                    <label class="sr-only" for="quantite_0">Quantité</label>
-                    <input type="number" step="any" name="ingredients[0][quantite]" id="quantite_0">
+        <button type="button" id="addIngredientButton" aria-label="Ajouter un ingrédient" class="btn btn_red">
+            +
+        </button>
+    </section>
 
-                    <label class="sr-only" for="unite_0">Unité</label>
-                    <select name="ingredients[0][id_unite]" id="unite_0">
-                        <option value="">Unité</option>
-                        <?php foreach ($unitesList as $unite): ?>
-                            <option value="<?= $unite['id_unites'] ?>">
-                                <?= htmlspecialchars($unite['unites']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+    <section class="stepsSection">
+        <h2>Nombre d’étapes</h2>
 
-                </li>
-            </ul>
-
-            <button type="button" id="addIngredientButton" aria-label="Ajouter un ingrédient">
-                +
-            </button>
-        </section>
-
-        <section class="stepsSection">
-            <h2>Nombre d’étapes</h2>
-
-            <div class="stepSelector" role="group" aria-label="Sélection des étapes">
-                <?php for ($i = 1; $i <= 10; $i++): ?>
-                    <button type="button" class="stepButton" data-step="<?= $i ?>" aria-pressed="false">
-                        <?= $i ?>
-                    </button>
-                <?php endfor; ?>
-            </div>
-
-            <div class="stepsContainer" id="stepsContainer"></div>
-        </section>
-
-        <div class="formActions">
-            <button type="submit" class="mainSubmitButton">
-                Ajouter
-            </button>
+        <div class="stepSelector" role="group" aria-label="Sélection des étapes">
+            <?php for ($i = 1; $i <= 10; $i++): ?>
+                <button type="button" class="stepButton" data-step="<?= $i ?>" aria-pressed="false">
+                    <?= $i ?>
+                </button>
+            <?php endfor; ?>
         </div>
 
-    </form>
+        <div class="stepsContainer" id="stepsContainer"></div>
+    </section>
 
-</main>
+    <div class="formActions">
+        <button type="submit" class="btn btn_red">
+            Ajouter
+        </button>
+    </div>
+
+</form>
 <script>
     const ingredientsList = document.getElementById("ingredientsList")
     const addIngredientButton = document.getElementById("addIngredientButton")
@@ -218,34 +157,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         li.className = "ingredientRow"
 
         li.innerHTML = `
-        <select name="ingredients[${ingredientIndex}][id_ingredient]" class="ingredientSelect">
-            <option value="">Choisir un ingrédient</option>
-            <?php foreach ($ingredientsList as $ingredient): ?>
-                <option value="<?= $ingredient['id_ingredient'] ?>">
-                    <?= htmlspecialchars($ingredient['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-            <option value="new">+ Ajouter un nouvel ingrédient</option>
-        </select>
+        <span class="ingredientSelectWrapper">
+            <label for="ingredient_${ingredientIndex}">Ingrédient</label>
+            <select name="ingredients[${ingredientIndex}][id_ingredient]" id="ingredient_${ingredientIndex}" class="ingredientSelect">
+                <optgroup label="Nouveaux ingrédients">
+                    <option value="">Choisir un ingrédient</option>
+                    <option value="new">+ Ajouter un nouvel ingrédient</option>
+                </optgroup>
+                <optgroup label="Ingrédients existants">
+                    <?php foreach ($ingredientsList as $ingredient): ?>
+                        <option value="<?= $ingredient['id_ingredient'] ?>"><?= htmlspecialchars($ingredient['nom']) ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
+            </select>
+        </span>
 
-        <input
-            type="text"
-            name="ingredients[${ingredientIndex}][new_nom]"
-            class="newIngredientInput"
-            placeholder="Nom du nouvel ingrédient"
-            hidden
-        >
+        <div class="input-group">
+            <label for="new_ingredient_${ingredientIndex}" hidden aria-hidden="true">Nom du nouvel ingrédient</label>
+            <input
+                type="text"
+                name="ingredients[${ingredientIndex}][new_nom]"
+                id="new_ingredient_${ingredientIndex}"
+                class="newIngredientInput"
+                placeholder="Nom du nouvel ingrédient"
+                hidden
+            >
+        </div>
 
-        <input type="number" step="any" name="ingredients[${ingredientIndex}][quantite]">
-
-        <select name="ingredients[${ingredientIndex}][id_unite]">
-            <option value="">Unité</option>
-            <?php foreach ($unitesList as $unite): ?>
-                <option value="<?= $unite['id_unites'] ?>">
-                    <?= htmlspecialchars($unite['unites']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+        <div class="qty-group">
+            <div class="input-group fullSize">
+                <label for="quantite_${ingredientIndex}">Quantité</label>
+                <input type="number" step="any" name="ingredients[${ingredientIndex}][quantite]" id="quantite_${ingredientIndex}" class="ingredientInput">
+            </div>
+            <div class="input-group">
+                <label for="unite_${ingredientIndex}">Unité</label>
+                <select name="ingredients[${ingredientIndex}][id_unite]" id="unite_${ingredientIndex}" class="ingredientSelect">
+                    <option value="">Unité</option>
+                    <?php foreach ($unitesList as $unite): ?>
+                        <option value="<?= $unite['id_unites'] ?>"><?= htmlspecialchars($unite['unites']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
     `
 
         ingredientsList.appendChild(li)
@@ -257,10 +210,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const descInput = document.getElementById("description")
     const stepsContainer = document.getElementById("stepsContainer")
     const stepButtons = document.querySelectorAll(".stepButton")
-/*    const addIngredientButton = document.getElementById("addIngredientButton")
-    const ingredientsList = document.getElementById("ingredientsList")
+    /*    const addIngredientButton = document.getElementById("addIngredientButton")
+        const ingredientsList = document.getElementById("ingredientsList")
 
-    let ingredientIndex = 1*/
+        let ingredientIndex = 1*/
     let steps = {}
 
     const createdSteps = new Set()
@@ -298,19 +251,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         })
     })
 
-    addIngredientButton.addEventListener("click", () => {
-        const li = document.createElement("li")
-        li.className = "ingredientRow"
-
-        li.innerHTML = `
-        <input type="text" name="ingredients[${ingredientIndex}][nom]" aria-label="Nom de l’ingrédient" required>
-        <input type="number" step="any" name="ingredients[${ingredientIndex}][quantite]" aria-label="Quantité">
-        <input type="text" name="ingredients[${ingredientIndex}][unite]" aria-label="Unité">
-    `
-
-        ingredientsList.appendChild(li)
-        ingredientIndex++
-    })
 
     form.addEventListener("submit", event => {
         let valid = true

@@ -83,9 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         echo '<link rel="stylesheet" href="/assets/css/admin.css">';
     }
 
-    // if page is / home, include home.css
     if ($page === 'home') {
         echo '<link rel="stylesheet" href="/assets/css/home.css">';
+    } else if ($page === 'recettes/add') {
+        echo '<link rel="stylesheet" href="/assets/css/add-recette.css">';
     }
 
     $classMain = '';
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <title>LOTY</title>
 </head>
 <body>
-
+<a href="#content" class="skip-link">Aller au contenu principal</a>
 <header>
     <?php include __DIR__ . '/includes/nav.php'; ?>
 </header>

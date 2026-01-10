@@ -16,13 +16,13 @@
     </div>
     <div class="colLinks">
         <ul>
-            <li><a href="/">À propos</a></li>
+            <li><a href="/terms">Mentions Légales</a></li>
             <li>
-                <a href="/profile">Mon compte</a>
+                <a href="/profil">Mon compte</a>
             </li>
             <li><a href="/bento/create">Créer un Bento</a></li>
             <li>
-                <a href="/recette/add">
+                <a href="/recettes/add">
                     Proposer une recette
                 </a>
             </li>
