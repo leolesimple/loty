@@ -135,26 +135,30 @@ if ($sendMail && filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
 
 <main>
     <header class="headerTitle">
-        <h1 class="title">Liste des ingrédients</h1>
+        <h1 class="title">Votre liste de courses</h1>
     </header>
 
     <section class="bentosSelected">
         <h2 class="sectionTitle">Bentos sélectionnés</h2>
         <ul class="bentosList">
             <?php foreach ($_SESSION['cart'] as $bento): ?>
+            <a href="/bento/view?id=<?= urlencode($bento['id']) ?>">
                 <li class="bentoItem"><?= htmlspecialchars($bento['nom']) ?></li>
+            </a>
             <?php endforeach; ?>
         </ul>
     </section>
 
     <section class="ingredientsTotal">
-        <h2 class="sectionTitle">Ingrédients totaux</h2>
+        <h2 class="sectionTitle">Ingrédients</h2>
 
-        <ul class="ingredientsList">
+        <ul class="ingredientsListPrint">
             <?php foreach ($finalIngredients as $item): ?>
                 <li class="ingredientItem">
-                    <?= rtrim(rtrim(number_format($item['quantite'], 2, '.', ''), '0'), '.') ?>
-                    <span class="ingredientUnit"><?= htmlspecialchars($item['unite']) ?></span>
+                    <span class="spanIngredientQuantity">
+                    <?= rtrim(rtrim(number_format($item['quantite'], 2, '.', ''), '0'), '.') ?><span
+                                class="ingredientUnit"><?= htmlspecialchars($item['unite']) ?></span>
+                    </span>
                     <span class="ingredientName"><?= htmlspecialchars($item['nom']) ?></span>
                 </li>
             <?php endforeach; ?>
@@ -162,21 +166,25 @@ if ($sendMail && filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
     </section>
 
     <section class="printSection">
-        <button class="printButton" onclick="window.print()">Imprimer la liste</button>
+        <button class="btn btn_blue" onclick="window.print()">Imprimer la liste</button>
     </section>
 
     <section class="mailSection">
-        <h2 class="sectionTitle">Envoyer par mail</h2>
+        <h2 class="mailSectionTitle">Envoyer par mail</h2>
 
         <form method="post" class="mailForm">
-            <label for="email" class="emailLabel">Votre email :</label>
-            <input type="email" id="email" name="email" required placeholder="Votre email" class="emailInput">
-            <input type="hidden" name="send_mail" value="1" class="sendMailHidden">
-            <button type="submit" class="sendButton">Envoyer</button>
+            <div class="input-group">
+                <label for="email" class="emailLabel">Votre email :</label>
+                <input type="email" id="email" name="email" required placeholder="janepouco@mail.net" class="emailInput">
+                <input type="hidden" name="send_mail" value="1" class="sendMailHidden">
+            </div>
+            <button type="submit" class="btn btn_red">Envoyer</button>
         </form>
 
         <?php if ($mailStatus): ?>
-            <p class="mailStatusMessage"><?= htmlspecialchars($mailStatus) ?></p>
+            <p class="mailStatusMessage" aria-live="polite" role="status">
+                <?= htmlspecialchars($mailStatus) ?>
+            </p>
         <?php endif; ?>
     </section>
 </main>

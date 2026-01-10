@@ -19,7 +19,7 @@
         ?>
             <?php
         if (isset($_SESSION['user_id'])) {
-            echo '<a href="/panier" class="nav-button-link">
+            echo '<a href="/panier" class="btn btn_red">
                     <p class="button-text">Panier</p>
                   </a>';
         } else {
@@ -32,7 +32,7 @@
     </div>
     <div class="bottom_nav">
         <ul>
-            <li><a class="linkNav" href="/">ACCUEIL</a></li>
+            <li><a class="linkNav" href="/" id="homeNav">ACCUEIL</a></li>
             <li><a class="linkNav" href="/bento">BENTO</a></li>
             <li><a class="linkNav" href="/recettes">RECETTES</a></li>
             <li><a class="linkNav" href="/podium" aria-disabled="true">PODIUM</a></li>

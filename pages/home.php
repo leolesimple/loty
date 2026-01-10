@@ -12,7 +12,7 @@ global $conn;
             Travail, études <br>ou encore voyages
         </h2>
         <p>
-            Vous devez préparer un repas mais ne savez pas quoi cuisiner ?
+            Vous devez préparer un repas, mais ne savez pas quoi cuisiner ?
         </p>
     </div>
 

@@ -211,10 +211,14 @@ section > div > p {
 
 @media (max-width: 600px) {
     .bentoVide {
-        width: 300px !important;
+        width: 450px !important;
+        bottom: -75% !important;
+        left: 55% !important;
+        transform: rotate(0deg) translate(-50%, -50%) !important;
+        top: auto !important;
     }
 
-    .textUpLeft1
+    .textUpLeft1,
     .textLotyRight,
     .explBento,
     .explBento2,
@@ -224,12 +228,17 @@ section > div > p {
     .textColRight1,
     .textColLeft2,
     .textColRight2 {
-        position: static;
-        transform: none;
-        max-width: 100%;
-        margin-bottom: 4rem;
-        top: auto;
-        left: auto;
-        right: auto;
+        position: static !important;
+        transform: none !important;
+        max-width: 100% !important;
+        margin-bottom: 4rem !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        padding:1rem 0 !important;
+    }
+
+    .content {
+        height: auto !important;
     }
 }

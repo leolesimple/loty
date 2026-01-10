@@ -5,13 +5,13 @@ require_once __DIR__ . '/../../includes/utilities/auth.php';
 check_logged_in();
 global $conn;
 
-$stmt = $conn->query("
+$selectRecettes = $conn->query("
     SELECT recette.id_recette, recette.recette_nom, type_recette.nom_type
     FROM recette
     JOIN type_recette ON recette.id_type = type_recette.id_type
     ORDER BY type_recette.id_type, recette.recette_nom
 ");
-$recettes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$recettes = $selectRecettes->fetchAll(PDO::FETCH_ASSOC);
 
 $recettesParType = [];
 foreach ($recettes as $recette) {
@@ -21,24 +21,25 @@ foreach ($recettes as $recette) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['bento_nom']) && !empty($_POST['recettes'])) {
 
-        $stmt = $conn->prepare("
+        $addBento = $conn->prepare("
             INSERT INTO bento (bento_nom, description, id_user)
-            VALUES (:nom, '', :user)
+            VALUES (:nom, :description, :user)
         ");
-        $stmt->execute([
-            'nom' => $_POST['bento_nom'],
+        $addBento->execute([
+            'nom' => trim($_POST['bento_nom']),
+            'description' => $_POST['bento_description'] ?? '',
             'user' => $_SESSION['user_id']
         ]);
 
         $idBento = $conn->lastInsertId();
 
-        $stmt = $conn->prepare("
+        $addBentoRecette = $conn->prepare("
             INSERT INTO bento_recettes (id_bento, id_recette)
             VALUES (:bento, :recette)
         ");
 
         foreach ($_POST['recettes'] as $idRecette) {
-            $stmt->execute([
+            $addBentoRecette->execute([
                 'bento' => $idBento,
                 'recette' => (int)$idRecette
             ]);
@@ -60,6 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>
                 Nom du bento
                 <input type="text" name="bento_nom" required>
+            </label>
+
+            <label>
+                Description (optionnel)
+                <input type="text" name="bento_description">
             </label>
 
             <div class="bentoPreview">

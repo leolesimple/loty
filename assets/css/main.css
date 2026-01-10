@@ -250,6 +250,8 @@ nav {
     color: #E94141;
     padding: 15px;
     display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .linkNav:hover {
@@ -365,6 +367,25 @@ footer {
     background-color: #df5b5b;
 }
 
+.btn_blue {
+    background-color: #1f7a73;
+    color: #F9F2E8;
+}
+
+.btn_blue:hover {
+    background-color: #17605e;
+}
+
+.button-text {
+    color: #FFF;
+    text-align: center;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .btn_icon {
     width: fit-content;
     display: flex;
@@ -474,7 +495,6 @@ footer {
 
 button {
     border: none;
-    margin-left: auto;
 }
 
 .registerContainer {
@@ -691,6 +711,63 @@ form.registerForm {
     max-width: 1140px;
 }
 
+@media (max-width: 900px) {
+    main {
+        padding: 20px 5px;
+    }
+
+    .teamBento {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .teamBento_left {
+        margin-right: 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .teamBento_right {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .emptyBento {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .bentoGrid {
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)) !important;
+    }
+
+    .large_card {
+        max-width: 300px !important;
+        width: 100% !important;
+        height: auto;
+    }
+
+    #homeNav {
+        display: none;
+    }
+
+    .bottom_nav li {
+        margin: 0 !important;
+    }
+
+    .bottom_nav {
+        font-size: 1.3rem;
+    }
+
+    .top_nav {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+
+    }
+}
 
 .large_card {
     width: clamp(100px, 30%, 300px);
@@ -1016,6 +1093,12 @@ li.ingredientCard {
     padding: 15px 0;
 }
 
+.nav_actions {
+    display: flex;
+    justify-self: end;
+    gap: 1rem;
+}
+
 .bentoActions {
     display: flex;
     flex-direction: column;
@@ -1120,7 +1203,8 @@ a.editProfileButton, .logoutProfileButton, .removeBentoButton {
 
     .bentoGrid {
         grid-template-columns: 1fr;
-        width: 100%;
+        width: auto !important;
+        max-width: none !important;
     }
 }
 
@@ -1202,6 +1286,169 @@ a.editProfileButton, .logoutProfileButton, .removeBentoButton {
     color: #E94141;
 }
 
+.bentoItem {
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #E94141;
+    background: #F9F2E8;
+    padding: 1.375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1rem;
+    width: fit-content;
+    color: #E94141;
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.bentosSelected {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .45rem;
+    margin-top: 2rem;
+}
+
+.bentosList {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: .45rem;
+    width: 100%;
+}
+
+.ingredientsTotal {
+    margin-top: 2rem;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background: #1f7a73;
+    color: #F9F2E8;
+    border: 2px solid #1f7a73;
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    display: flex;
+    width: 77.25rem;
+    padding: 1.875rem 2.5625rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.375rem;
+}
+
+.ingredientItem {
+    display: flex;
+    padding: 0.875rem 1.9375rem;
+    align-items: center;
+    gap: 4.5625rem;
+    align-self: stretch;
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    border: 3px solid #1f7a73;
+    background: #F9F2E8;
+    color: #1f7a73;
+    margin-top: .25rem;
+    width: 100%;
+}
+
+.ingredientsListPrint {
+    display: flex;
+    width: 100%;
+    padding: 1.875rem 2.5625rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.375rem;
+}
+
+.spanIngredientQuantity {
+    max-width: 60px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.ingredientName {
+    font-weight: normal;
+}
+
+.printSection {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mailSection {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.mailSectionTitle {
+    font-family: "SHRIMP", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #E94141;
+    margin-bottom: 1rem;
+}
+
+.mailForm {
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    align-items: flex-end;
+    max-width: 1140px;
+}
+
+.mailForm > .input-group {
+    width: 100%;
+}
+
+.mailForm > .input-group > label {
+    margin-top: 0;
+}
+
+.mailForm > .input-group > input[type="email"] {
+    width: 100%;
+}
+
+.mailStatusMessage {
+    background: #1f7a73;
+    color: #F9F2E8;
+    margin-top: 1rem;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 1.15rem;
+    padding: .75rem 1.5rem;
+    border-radius: 1.5625rem 1.5625rem 0 0;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .ingredientsTotal, .ingredientsTotal * {
+        visibility: visible;
+    }
+
+    .ingredientsTotal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+    }
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -1212,4 +1459,18 @@ a.editProfileButton, .logoutProfileButton, .removeBentoButton {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 10000;
+}
+
+.skip-link:focus {
+    top: 0;
 }
