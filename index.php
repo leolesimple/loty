@@ -25,6 +25,8 @@ if ($page === 'login') {
     $file = __DIR__ . '/pages/auth/register.php';
 } elseif ($page === 'profil') {
     $file = __DIR__ . '/pages/auth/profil.php';
+} elseif ($page === 'profil/edit') {
+    $file = __DIR__ . '/pages/auth/edit.php';
 } elseif ($page === 'logout') {
     $file = __DIR__ . '/pages/auth/logout.php';
 } elseif ($page === 'dashboard') {
@@ -87,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         echo '<link rel="stylesheet" href="/assets/css/home.css">';
     } else if ($page === 'recettes/add') {
         echo '<link rel="stylesheet" href="/assets/css/add-recette.css">';
+    } else if ($page === 'profil/edit') {
+        echo '<link rel="stylesheet" href="/assets/css/edit-profile.css">';
     }
 
     $classMain = '';
