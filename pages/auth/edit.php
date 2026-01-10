@@ -178,7 +178,7 @@ if (empty($user_data['photo'])) {
         <section class="editProfileSection profilePhotoSection">
             <h2>Photo de profil</h2>
             <div class="profilePictureContainer">
-                <img src="<?php echo clean($user_data['photo']); ?>" alt="Photo de profil actuelle" width="200" height="200" class="currentProfileImg">
+                <img src="/<?php echo clean($user_data['photo']); ?>" alt="Photo de profil actuelle" width="200" height="200" class="currentProfileImg">
                 <div class="uploadFieldContainer">
                     <label for="photo" class="uploadLabel">Modifier la photo</label>
                     <input type="file" id="photo" name="photo" accept="image/jpeg,image/png,image/gif,image/webp" aria-label="Sélectionner une photo de profil" required>
