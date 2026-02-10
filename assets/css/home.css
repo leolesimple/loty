@@ -363,7 +363,7 @@ picture {
     top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #46B3AA;
+    background-color: var(--secondary-color);
     color: #fff;
     font-family: "Fivo Sans", sans-serif;
     font-size: 0.75rem;

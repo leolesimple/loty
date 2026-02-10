@@ -130,7 +130,7 @@ function createModal(content) {
 }
 
 // Exemple d'utilisation
-if (localStorage.getItem('modalShown') !== 'true') {
+//if (localStorage.getItem('modalShown') !== 'true' ) {
     createModal(modalContent);
     localStorage.setItem('modalShown', 'true');
-}
+//}
