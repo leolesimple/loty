@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         echo '<link rel="stylesheet" href="/assets/css/edit-profile.min.css">';
     }
 
-    if ($fromIn || 1 === 1) {
+    if ($fromIn || $file === __DIR__ . '/pages/home.php') {
         echo '<link rel="stylesheet" href="/assets/css/modal.min.css">';
         echo '<script src="/assets/js/modal.js" defer async></script>';
     }

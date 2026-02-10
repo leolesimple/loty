@@ -627,7 +627,7 @@ form.registerForm {
     display: block;
 }
 
-.bentoHeader h1 {
+.bentoHeader h1:not(.viewAll) {
     position: absolute;
     color: var(--primary-color);
     font-size: 3rem;
@@ -637,6 +637,13 @@ form.registerForm {
     5px -5px 0 var(--background-color);,
     -5px 5px 0 var(--background-color);,
     5px 5px 0 var(--background-color);
+}
+
+.bentoHeader h1.viewAll {
+    color: var(--primary-color);
+    font-size: 3rem;
+    font-family: 'Saint Regus', sans-serif;
+    text-align: center;
 }
 
 .bentoDetailHeader {
