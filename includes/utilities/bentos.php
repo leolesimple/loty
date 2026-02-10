@@ -147,13 +147,13 @@ function generateUserRecetteLayout($count): string
         return '<p>Retrouvez ici vos créations de Recettes !</p>';
     }
     $recetteLayout = '';
-    $recette_query = $conn->prepare("SELECT id_recette, recette_nom FROM recette WHERE id_user = ? ORDER BY id_recette DESC LIMIT ?");
+    $recette_query = $conn->prepare("SELECT id_recette, recette_nom, recette_img_link FROM recette WHERE id_user = ? ORDER BY id_recette DESC LIMIT ?");
     $recette_query->bindValue(1, $_SESSION['user_id'], PDO::PARAM_INT);
     $recette_query->bindValue(2, $count, PDO::PARAM_INT);
     $recette_query->execute();
     $recette_items = $recette_query->fetchAll();
     foreach ($recette_items as $recette) {
-        $image = '/assets/img/recette-default.png';
+        $image = $recette['recette_img_link']; // ?: '/assets/img/recette-default.png';
         $title = $recette['recette_nom'];
         $recetteLayout .= renderRecetteItem($image, clean($title));
     }
@@ -166,6 +166,7 @@ function generateUserRecetteLayout($count): string
  * */
 function renderRecetteItem(string $image, string $title): string
 {
+    echo 'image dans recette item : ' . $image;
     return '
     <article class="recetteItem">
         <img src="' . $image . '" alt="" width="215" height="215" class="recetteImage">

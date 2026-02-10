@@ -3,9 +3,12 @@
     width: 100%;
     max-width: 1140px;
     margin: 0 auto;
-    height: calc(100vh - 170px);
+    min-height: calc(100vh - 170px);
     justify-content: center;
     align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 @media (max-width: 1000px) {
@@ -32,45 +35,13 @@
     }
 }
 
-.welcomeLoty img:not(.bentoVide) {
+.bentoVide {
+    display: block;
+    max-width: 460px;
     width: 100%;
     height: auto;
 }
 
-.bentoVide {
-    position: fixed;
-    bottom: -30%;
-    right: 50%;
-    transform: rotate(0deg) translate(50%, 0);
-    width: 750px;
-    transition: all 2s cubic-bezier(0.49, -0.01, 0.07, 0.99) !important;
-    transform-origin: center !important;
-    z-index: 999;
-}
-
-.bentoVide.step1 {
-    transform: rotate(23deg) translate(-69%, -27%);
-    top: 50%;
-    left: 50%;
-}
-
-.bentoVide.step2 {
-    transform: rotate(90deg) translate(-50%, -50%);
-    top: 50%;
-    left: 16%;
-}
-
-.bentoVide.step3 {
-    transform: rotate(0deg) translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-}
-
-.bentoVide.step4 {
-    transform: rotate(0deg) translate(-50%, -65%);
-    top: 50%;
-    left: 50%;
-}
 
 section {
     max-width: 1140px;
@@ -83,13 +54,15 @@ section.content {
     height: 180rem;
 }
 
+/*
 section > div {
     max-width: 400px;
 }
+*/
 
 section > div > h2 {
     color: #E94141;
-    font-family: "Shrimp", sans-serif;
+    font-family: "Saint Regus", sans-serif;
     font-size: 2.25rem;
     font-style: normal;
     font-weight: 400;
@@ -124,7 +97,7 @@ section > div > p {
 }
 
 .textLotyRight p {
-    font-family: "SHRIMP", sans-serif;
+    font-family: "Saint Regus", sans-serif;
     font-size: 2.35rem;
     max-width: 350px;
 }
@@ -154,7 +127,7 @@ section > div > p {
 
 .textHeIs h2 {
     color: #46B3AA;
-    font-family: "SHRIMP", sans-serif;
+    font-family: "Saint Regus", sans-serif;
     font-size: 1.75rem;
     font-style: normal;
     font-weight: 700;
@@ -170,33 +143,33 @@ section > div > p {
 
 .withLoty h2 {
     color: #E94141;
-    font-family: "SHRIMP", sans-serif;
+    font-family: "Saint Regus", sans-serif;
     font-size: 2.95rem;
 }
 
 .textColLeft1 {
-    max-width:300px;
+    max-width: 300px;
     position: absolute;
     top: 140rem;
     left: 20px;
 }
 
 .textColRight1 {
-    max-width:300px;
+    max-width: 300px;
     position: absolute;
     top: 150rem;
     right: 20px;
 }
 
 .textColLeft2 {
-    max-width:300px;
+    max-width: 300px;
     position: absolute;
     top: 165rem;
     left: 20px;
 }
 
 .textColRight2 {
-    max-width:300px;
+    max-width: 300px;
     position: absolute;
     top: 175rem;
     right: 20px;
@@ -210,13 +183,6 @@ section > div > p {
 }
 
 @media (max-width: 600px) {
-    .bentoVide {
-        width: 450px !important;
-        bottom: -75% !important;
-        left: 55% !important;
-        transform: rotate(0deg) translate(-50%, -50%) !important;
-        top: auto !important;
-    }
 
     .textUpLeft1,
     .textLotyRight,
@@ -235,10 +201,199 @@ section > div > p {
         top: auto !important;
         left: auto !important;
         right: auto !important;
-        padding:1rem 0 !important;
+        padding: 1rem 0 !important;
     }
 
     .content {
         height: auto !important;
+    }
+}
+
+.hero-bento-grid {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 10px auto;
+}
+
+.hero-bento-grid .bento-grid {
+    display: flex;
+    gap: 1.25rem;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-bento {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 100%;
+    min-width: 400px;
+    order: 1;
+    padding: 1.75rem !important;
+}
+
+.bento-col {
+    flex: 1 1 100%;
+    gap: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-col-left {
+    order: 0;
+}
+
+.bento-col-right {
+    order: 2;
+}
+
+.hero-bento__tagline {
+    font-family: "Fivo Sans", sans-serif;
+    font-variant: small-caps;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+    color: #46B3AA;
+    margin: 0;
+    font-weight: 700;
+}
+
+.hero-bento__text {
+    font-family: "Fivo Sans", sans-serif;
+    color: #E94141;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.hero-bento__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.hero-bento__actions a {
+    width: 100%;
+}
+
+
+.bento-grid {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.hero-bento__title {
+    font-family: "Saint Regus", sans-serif;
+    font-size: 2.75rem;
+    line-height: 1;
+    color: #E94141;
+    margin: 0 0 1rem 0;
+}
+
+.bento-item {
+    position: relative;
+    padding: 1.2rem 1.25rem;
+    background: #fffbfb;
+    color: #E94141;
+    font-family: "Fivo Sans", sans-serif;
+    border: 2px solid #E94141;
+    border-radius: 1.25rem 1.25rem 0 0;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1 1 calc(50% - 0.5rem);
+}
+
+.bento-item__title {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.bento-item__text {
+    font-size: 1rem;
+    line-height: 1.15;
+}
+
+picture {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 320px;
+}
+
+.bento-idee {
+    order: 1;
+}
+
+.bento-snack {
+    order: 2;
+}
+
+.bento-mix {
+    order: 3;
+}
+
+.bento-comm {
+    order: 4;
+}
+
+.bento-liste {
+    order: 5;
+}
+
+.aboutLoty__text, .whatsbento__text {
+    font-family: "Fivo Sans", sans-serif;
+    color: #E94141;
+    font-size: 1.3625rem;
+    font-weight: 500 !important;
+    margin: 0;
+}
+
+.bento-item__badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #46B3AA;
+    color: #fff;
+    font-family: "Fivo Sans", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+@media (max-width: 1000px) {
+    .hero-bento-grid {
+        padding: 4rem 1.5rem 1.5rem;
+    }
+
+    .hero-bento-grid .bento-grid {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero-bento-grid {
+        padding: 3rem 1rem 1rem;
+    }
+
+    .hero-bento-grid .bento-grid {
+        flex-direction: column;
+    }
+
+    .bento-item,
+    .bento-intro {
+        flex: 1 1 100%;
+        order: initial;
     }
 }

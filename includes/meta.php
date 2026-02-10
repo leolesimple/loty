@@ -56,8 +56,6 @@ define('BASE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
-<link rel="stylesheet" href="/assets/css/app.css">
-
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="color-scheme" content="light dark">

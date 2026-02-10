@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/utilities/db.php';
 require_once __DIR__ . '/../includes/utilities/recipes.php';
 require_once __DIR__ . '/../includes/utilities/auth.php';
 
-check_logged_in();
+//check_logged_in();
 ?>
 
 <header class="bentoHeader">

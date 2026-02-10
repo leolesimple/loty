@@ -1,0 +1,120 @@
+/* Modal overlay */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal dialog container */
+.modal-dialog {
+    max-width: 500px;
+    width: 90%;
+    margin: 1.75rem auto;
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    font-family: 'Fivo Sans', sans-serif;
+}
+
+/* Modal header */
+.modal-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary-color);
+}
+
+/* Modal title */
+.modal-title {
+    margin: 0;
+    font-family: 'Saint Regus', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--background-color);
+    letter-spacing: 0.5px;
+}
+
+/* Close button (X) */
+.close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--background-color);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.close:hover {
+    background-color: var(--secondary-color);
+    transform: rotate(90deg);
+}
+
+.close:focus {
+    outline: none;
+}
+
+.close span {
+    display: block;
+}
+
+/* Modal body */
+.modal-body {
+    padding: 2rem;
+    font-family: 'Fivo Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333333;
+}
+
+/* Modal footer */
+.modal-footer {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+    .modal-dialog {
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        padding: 1rem 1.5rem;
+    }
+}

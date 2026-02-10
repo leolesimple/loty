@@ -1,139 +1,88 @@
 <?php
 global $conn;
 ?>
+<section class="hero-bento-grid" id="hero-bento" aria-labelledby="hero-bento-title">
+    <div class="bento-grid">
+        <div class="bento-item hero-bento">
+            <p class="hero-bento__tagline">Découvre, compose, varie</p>
+            <h1 id="hero-bento-title" class="hero-bento__title">Compose ta semaine en un clin d'œil !</h1>
+            <p class="hero-bento__text">Inspiré de la cuisine japonaise, organise ta semaine de déjeuner en Bento pour
+                des repas variés et </p>
+            <div class="hero-bento__actions">
+                <a class="btn btn_red" href="/register">Rejoins-nous !</a>
+                <a class="btn btn_blue" href="/bento">Voir nos Bentos</a>
+            </div>
+        </div>
+        <div class="bento-col bento-col-left">
+            <div class="bento-item bento-idee">
+                <h2 class="bento-item__title">Recettes express</h2>
+                <p class="bento-item__text">Des Bento prêt en moins de 30 minutes pour les plus pressés ! <br> Retrouvez
+                    aussi nos Bentos plus sophiqtiqués pour des recettes variées. </p>
+            </div>
+            <div class="bento-item bento-mix">
+                <span class="bento-item__badge">
+                    Bientôt disponible
+                </span>
+                <h2 class="bento-item__title">Personnalise à fond</h2>
+                <p class="bento-item__text">De l'inspiration ? Par d'une base vide et personnalise ton Bento de A à Z.
+                    Tu peux aussi partir d'une base déjà composée et la personnaliser selon tes envies.</p>
+            </div>
+        </div>
+        <div class="bento-col bento-col-right">
+            <div class="bento-item bento-snack">
+                <h2 class="bento-item__title">Varie les plaisirs</h2>
+                <p class="bento-item__text">Assemble des recettes selon tes envies, du plus loufouque au plus classique,
+                    il y a l'embarra du choix !</p>
+            </div>
+            <div class="bento-item bento-comm">
+                <h2 class="bento-item__title">Communauté</h2>
+                <p class="bento-item__text">Prends part à la communauté LOTY et partage tes recettes et compositions à
+                    tous.</p>
+            </div>
+            <div class="bento-item bento-liste">
+                <h2 class="bento-item__title">Liste de courses</h2>
+                <p class="bento-item__text">On te génère ta liste de courses, tu n'as plus qu'à aller chez ton
+                    commerçant préféré pour commencer la préparation de tes Bentos.</p>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="welcomeLoty">
     <img src="/assets/img/LOTY_accueil_baseline.svg" alt="Bienvenue sur le site de LOTY, Lunch of Tomorrow and beYond"
-         class="lotyLogo">
-    <img src="/assets/img/bento-vide.svg" alt="" class="bentoVide">
+         class="lotyLogo" loading="lazy">
 </section>
-<section class="content">
-    <div class="textUpLeft1">
-        <h2>
-            Travail, études <br>ou encore voyages
-        </h2>
-        <p>
-            Vous devez préparer un repas, mais ne savez pas quoi cuisiner ?
-        </p>
+<section>
+    <div class="aboutLoty">
+        <h2 class="aboutLoty__title">Qu'est-ce que LOTY ?</h2>
+        <p class="aboutLoty__text">LOTY, c'est la plateforme qui révolutionne ta pause déjeuner en te proposant des
+            Bento personnalisables, rapides à préparer et adaptés à tes goûts. Que tu sois pressé ou que tu aimes
+            prendre ton temps, LOTY t'offre une variété de recettes pour composer le Bento parfait chaque jour. Rejoins
+            notre communauté de passionnés de cuisine et découvre comment rendre tes repas plus savoureux et équilibrés !</p>
     </div>
-
-    <div class="textLotyRight">
-        <p><span class="blueText">LOTY</span> est la solution !</p>
+</section>
+<section class="whatsbento">
+    <div>
+        <h2 class="whatsbento__title">Un Ben-quoi ?</h2>
+        <p class="whatsbento__text">Le Bento c'est <span class="upp">le</span> repas complet, équilibré et savoureux, présenté dans une boîte
+            compartimentée. Originaire du Japon, le Bento est conçu pour offrir une variété d'aliments en une seule
+            portion pratique, idéale pour les déjeuners sur le pouce. Chez LOTY, nous te permettons de composer ton
+            propre Bento en choisissant parmi une sélection de recettes délicieuses et adaptées à tes préférences
+            alimentaires. Que tu sois fan de cuisine traditionnelle ou que tu aimes expérimenter avec des nouvelles saveurs, notre plateforme t'aide à créer le Bento parfait pour chaque jour de la semaine.</p>
     </div>
-
-    <div class="explBento">
-        <h2>
-            Qu’est ce qu’un Bento ?
-        </h2>
-        <p>
-            C’est une boite <a href="/bento">et bien plus</a> !
-        </p>
-    </div>
-
-    <div class="explBento2">
-        <p>Le terme Bento vient du japon, il représente un plat unique composé de plusieurs compartiments.</p>
-    </div>
-
-    <div class="textHeIs">
-        <h2>
-            Il est :
-        </h2>
-        <ul class="bentoList">
-            <li>
-                → prêt à consommer
-            </li>
-            <li>
-                → équilibré
-            </li>
-            <li>
-                → savoureux
-            </li>
-            <li>
-                → Composé de diverses préparations
-            </li>
-        </ul>
-    </div>
-
-    <div class="textUpLeft2 withLoty">
-        <h2>
-            Avec <span class="blueText">LOTY</span> :<br>
-        </h2>
-    </div>
-
-    <div class="textColLeft1">
-        <p>
-            Explorez une sélection de Bento et de recettes.
-        </p>
-    </div>
-
-    <div class="textColRight1">
-        <p>
-            Ajoutez-les à votre panier, personnalisez les et générez votre liste de courses.
-        </p>
-    </div>
-
-    <div class="textColLeft2">
-        <p>
-            Partagez vos créations Bento.
-        </p>
-    </div>
-
-    <div class="textColRight2">
-        <p>
-            Parcourez les Bento de la communautés et votez pour vos favoris.
-        </p>
-    </div>
+<figure class="whatsbento__image">
+    <picture>
+        <source srcset="/assets/img/bentoVide_default.svg" type="image/svg+xml">
+        <source srcset="/assets/img/bentoVide_default.png" type="image/png">
+        <img src="/assets/img/bentoVide_default.jpg" alt="Exemple de Bento composé de riz, légumes, œufs et viande" loading="lazy">
+    </picture>
+    <figcaption>
+        Exemple d'une boîte Bento.
+    </figcaption>
+</figure>
 </section>
 <section class="joinLoty">
     <a href="/register" class="btn btn_red">
         REJOINS LA COMMUNAUTÉ
     </a>
 </section>
-<script>
-    // When the top of .lotyLogo is in the 15% of the top of the viewport, add the class 'step1' to .bentoVide
-    const lotyLogo = document.querySelector('.lotyLogo');
-    const bentoVide = document.querySelector('.bentoVide');
-
-    window.addEventListener('scroll', () => {
-        const lotyLogoTop = lotyLogo.getBoundingClientRect().top;
-        const viewportHeight = window.innerHeight;
-
-        if (lotyLogoTop < viewportHeight * 0.1) {
-            bentoVide.classList.add('step1');
-        } else {
-            bentoVide.classList.remove('step1');
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        const lotyLogoTop = lotyLogo.getBoundingClientRect().top;
-        const viewportHeight = window.innerHeight;
-
-        if (lotyLogoTop < viewportHeight * -0.8) {
-            bentoVide.classList.add('step2');
-        } else {
-            bentoVide.classList.remove('step2');
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        const lotyLogoTop = lotyLogo.getBoundingClientRect().top;
-        const viewportHeight = window.innerHeight;
-
-        if (lotyLogoTop < viewportHeight * -1.75) {
-            bentoVide.classList.add('step3');
-        } else {
-            bentoVide.classList.remove('step3');
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        const lotyLogoTop = lotyLogo.getBoundingClientRect().top;
-        const viewportHeight = window.innerHeight;
-
-        if (lotyLogoTop < viewportHeight * -1.95) {
-            bentoVide.classList.add('step4');
-        } else {
-            bentoVide.classList.remove('step4');
-        }
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>

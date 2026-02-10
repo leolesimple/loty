@@ -8,7 +8,7 @@ function renderRecettesItem(string $image, string $title, string $id_recette): s
     return '
     <a href="/recettes/view?id=' . urlencode($id_recette) . '" class="recetteLink">
         <article class="recettesItem" data-title="' . $title . '">
-            <img src="' . $image . '" alt="" width="215" height="215" class="recetteImage">
+            <img src="/uploads/recettes/' . $image . '@1x.webp" alt="" width="215" height="215" class="recetteImage">
             <div class="recetteInfo">
                 <h3>' . $title . '</h3>
             </div>
@@ -36,7 +36,7 @@ function generateRecetteLayout(int $count, int $type, bool $isProfile = false): 
 
     $limit = $count === 0 ? '' : ' LIMIT :count';
     $recette_query = $conn->prepare(
-        "SELECT id_recette, recette_nom
+        "SELECT id_recette, recette_nom, recette_img_link
          FROM recette
          $where
          ORDER BY id_recette DESC$limit"
@@ -58,7 +58,7 @@ function generateRecetteLayout(int $count, int $type, bool $isProfile = false): 
     }
 
     foreach ($recette_query->fetchAll() as $recette) {
-        $image = '/assets/img/recette-default.png';
+        $image = $recette['recette_img_link'] ?: 'recette-default';
         $title = $recette['recette_nom'];
         $id_recette = $recette['id_recette'];
         $recetteLayout .= renderRecettesItem($image, clean($title), $id_recette);
