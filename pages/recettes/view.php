@@ -12,6 +12,7 @@ if (isset($_GET['id'])) {
 $recipeSql = "SELECT
     recette.id_recette,
     recette.recette_nom,
+    recette.recette_img_link,
     user.id AS user_id,
     user.username,
     user.nom,
@@ -58,7 +59,7 @@ foreach ($recipeData as $row) {
         $steps[$row['num_etape']] = $row['description_etape'];
     }
 }
-$recette_image = '/assets/img/recette-default.png';
+$recette_image = $recipe['recette_img_link'] ?: '/assets/img/recette-default.png';
 ksort($steps);
 
 
@@ -80,7 +81,8 @@ ksort($steps);
     <div class="recipeHeaderContent">
         <div class="recipeVisualColumn">
             <div class="imageWrapper">
-                <?= '<img src="' . htmlspecialchars($recette_image) . '" alt="Image de la recette ' . htmlspecialchars($recipe['recette_nom']) . '" class="recipeImage">'; ?>
+                <?= '<img src="/uploads/recettes/' . htmlspecialchars($recette_image) . '@1x.webp" alt="Image de la recette ' . htmlspecialchars($recipe['recette_nom']) . '" class="recipeImage">'; ?>
+
             </div>
             <div class="floatingActions">
                 <button class="actionButton saveButton" aria-label="Sauvegarder" id="saveRecipeBtn">

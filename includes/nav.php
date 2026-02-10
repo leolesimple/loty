@@ -20,7 +20,7 @@
             <?php
         if (isset($_SESSION['user_id'])) {
             echo '<a href="/panier" class="btn btn_red">
-                    <p class="button-text">Panier</p>
+                    <p class="button-text">Ma Liste</p>
                   </a>';
         } else {
             echo '<a href="/login" class="btn btn_red">

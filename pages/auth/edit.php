@@ -172,7 +172,6 @@ if (empty($user_data['photo'])) {
         </div>
     <?php endif; ?>
 
-    <!-- Formulaire de photo de profil -->
     <form method="post" enctype="multipart/form-data" id="photoForm" class="profileEditForm">
 
         <section class="editProfileSection profilePhotoSection">
@@ -190,7 +189,6 @@ if (empty($user_data['photo'])) {
         </section>
     </form>
 
-    <!-- Formulaire d'informations personnelles -->
     <form method="post" id="editProfileForm" class="profileEditForm">
 
         <section class="editProfileSection personalInfoSection">

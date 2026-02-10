@@ -2,7 +2,7 @@
 global $conn;
 require_once __DIR__ . '/../includes/utilities/auth.php';
 
-check_logged_in();
+//check_logged_in();
 // Session start if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

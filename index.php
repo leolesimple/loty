@@ -19,6 +19,8 @@ if ($page !== 'login') {
     session_start();
 }
 
+$fromIn = isset($_GET['from']) && $_GET['from'] === 'in';
+
 if ($page === 'login') {
     $file = __DIR__ . '/pages/auth/login.php';
 } elseif ($page === 'register') {
@@ -79,18 +81,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <?php
     include __DIR__ . '/includes/meta.php';
     ?>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main.min.css">
     <?php
     if (str_starts_with($page, 'admin')) {
-        echo '<link rel="stylesheet" href="/assets/css/admin.css">';
+        echo '<link rel="stylesheet" href="/assets/css/admin.min.css">';
     }
 
     if ($page === 'home') {
-        echo '<link rel="stylesheet" href="/assets/css/home.css">';
+        echo '<link rel="stylesheet" href="/assets/css/home.min.css">';
     } else if ($page === 'recettes/add') {
-        echo '<link rel="stylesheet" href="/assets/css/add-recette.css">';
+        echo '<link rel="stylesheet" href="/assets/css/add-recette.min.css">';
     } else if ($page === 'profil/edit') {
-        echo '<link rel="stylesheet" href="/assets/css/edit-profile.css">';
+        echo '<link rel="stylesheet" href="/assets/css/edit-profile.min.css">';
+    }
+
+    if ($fromIn || 1 === 1) {
+        echo '<link rel="stylesheet" href="/assets/css/modal.min.css">';
+        echo '<script src="/assets/js/modal.js" defer async></script>';
     }
 
     $classMain = '';
@@ -121,5 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </footer>
 
+<script src="/assets/js/app.min.js"></script>
 </body>
 </html>
