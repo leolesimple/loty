@@ -1,0 +1,38 @@
+services:
+  loty:
+    build: .
+    container_name: loty
+    restart: unless-stopped
+    networks:
+      - heartbeat-net
+    depends_on:
+      - loty-db
+    environment:
+      - TZ=Europe/Paris
+      - DB_HOST=loty-db
+      - DB_NAME=loty
+      - DB_USER=loty
+      - DB_PASSWORD=${LOTY_DB_PASSWORD}
+
+  loty-db:
+    image: mariadb:12.3
+    container_name: loty-db
+    restart: unless-stopped
+    networks:
+      - heartbeat-net
+    volumes:
+      - loty-db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      - TZ=Europe/Paris
+      - MYSQL_DATABASE=loty
+      - MYSQL_USER=loty
+      - MYSQL_PASSWORD=${LOTY_DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${LOTY_DB_ROOT_PASSWORD}
+
+networks:
+  heartbeat-net:
+    external: true
+
+volumes:
+  loty-db-data:

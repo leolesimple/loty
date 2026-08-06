@@ -1,0 +1,43 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environnement
+.env.local
+.env.*.local
+
+# PHP
+vendor/
+composer.lock
+*.log
+
+# Node
+node_modules/
+npm-debug.log
+
+# Upload temporaires
+uploads/profiles/*
+uploads/recettes/*
+uploads/bento/*
+!uploads/profiles/.gitkeep
+!uploads/recettes/.gitkeep
+!uploads/bento/.gitkeep
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Documentation de projet (artefacts)
+data/ComptesRendusMensuels.pdf
+data/accessibilite.pdf
+data/gestionDeProjet.pdf
+
