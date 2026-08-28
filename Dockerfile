@@ -15,7 +15,10 @@ COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
 COPY --chown=www-data:www-data . /var/www/html/
 
+COPY docker/security.conf /etc/apache2/conf-available/security.conf
+
 RUN chmod -R 755 /var/www/html \
-    && a2ensite 000-default
+    && a2ensite 000-default \
+    && a2enconf security
 
 EXPOSE 80
