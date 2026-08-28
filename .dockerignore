@@ -1,0 +1,7 @@
+.git
+.env
+.env.*
+*.bak
+*.log
+.gitignore
+init.sql
