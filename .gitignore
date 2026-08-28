@@ -41,3 +41,7 @@ data/ComptesRendusMensuels.pdf
 data/accessibilite.pdf
 data/gestionDeProjet.pdf
 
+
+# Secrets (retire de git le 2026-08-28 — durcissement post-audit)
+.env
+*.bak

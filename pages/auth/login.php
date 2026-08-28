@@ -32,7 +32,10 @@ if (!isset($conn) || !($conn instanceof PDO)) {
     }
 }
 
-$secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+// Origine derrière Cloudflare Tunnel : le TLS est terminé à l'edge, le
+// conteneur ne reçoit que du HTTP en clair. Seul chemin d'accès public
+// = HTTPS via cloudflared (aucun port n'est publié hors ce tunnel).
+$secure = true;
 $cookieParams = session_get_cookie_params();
 $lifetime = 0;
 if (isset($_POST['submit_login']) && isset($_POST['remember_me'])) {

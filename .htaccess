@@ -35,11 +35,28 @@ Options -Indexes
     Deny from all
 </Files>
 
+# Durcissement post-audit : bloque le code source, la config et les
+# secrets qui vivent dans le docroot (COPY . /var/www/html/ au build).
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} \.(env|git|svn|bak|old|log|sql|md|swp|zip|ini|yml|yaml)$ [NC,OR]
+RewriteCond %{REQUEST_URI} /\.git [NC,OR]
+RewriteCond %{REQUEST_URI} /Dockerfile$ [NC]
+RewriteRule .* - [F,L]
+
+# Dotfiles (sauf /.well-known/, requis pour les challenges ACME)
+RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
+RewriteCond %{REQUEST_URI} /\.[^/]+$ [NC]
+RewriteRule .* - [F,L]
+</IfModule>
+
 # Header settings
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Content-Security-Policy-Report-Only "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self'"
 </IfModule>
 
 # Gzip Compression
