@@ -45,3 +45,4 @@ data/gestionDeProjet.pdf
 # Secrets (retire de git le 2026-08-28 — durcissement post-audit)
 .env
 *.bak
+init.sql
