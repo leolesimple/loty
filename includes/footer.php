@@ -17,6 +17,7 @@
     <div class="colLinks">
         <ul>
             <li><a href="/terms">Mentions Légales</a></li>
+            <li><a href="/confidentialite">Confidentialité</a></li>
             <li>
                 <a href="/profil">Mon compte</a>
             </li>

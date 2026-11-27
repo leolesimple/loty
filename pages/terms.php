@@ -62,6 +62,14 @@
             text-decoration: none;
         }
 
+        .termsSection ul {
+            margin: 0 0 12px;
+            padding-left: 18px;
+        }
+        .termsSection li {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
         .role {
             margin-top: 24px;
         }
@@ -94,100 +102,52 @@
         }
 
     </style>
-    <div class="termsHeader" role="banner">
+    <div class="termsHeader">
         <h1>Mentions légales</h1>
-        <p>Dernière mise à jour : 6 janvier 2026</p>
+        <p>Dernière mise à jour : 27 novembre 2026</p>
     </div>
-
     <section class="termsSection">
-        <h2>Éditeur du site</h2>
-        <p>Le site <strong>LOTY</strong> est édité par :</p>
+        <h2>Éditeur et hébergeur</h2>
+        <p>Le site <strong>LOTY</strong> (accessible à l'adresse https://loty.leolesimple.fr) est édité à titre non professionnel par Léo Lesimple, qui l'héberge lui-même sur un serveur personnel.</p>
         <address>
             <p>
-                <strong>Université Gustave Eiffel</strong><br>
-                5 boulevard Descartes<br>
-                77420 Champs-sur-Marne<br>
-                Tél. : <a href="tel:+33160957500">01 60 95 75 00</a><br>
-                SIRET : 130 026 123 00013
-            </p>
-        </address>
-    </section>
-
-    <section class="termsSection">
-        <h2>Directeur de la publication</h2>
-        <p>Gilles Roussel, <strong>directeur de l'Université Gustave Eiffel</strong></p>
-    </section>
-
-    <section class="termsSection">
-        <h2>Responsable de la protection des données (DPO)</h2>
-        <p>Pour l’exercice de vos droits ou pour toute question relative aux traitements de données, vous pouvez
-            contacter le service informatique au contact suivant :</p>
-        <address>
-            <p><strong>Véronique Juge</strong></p>
-            <p>
-                5 boulevard Descartes<br>
-                77420 Champs-sur-Marne<br>
-                Mail : <a
-                        href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a><br>
-            </p>
-        </address>
-        <p>
-            Le site LOTY ne collecte aucune donnée personnelle vous concernant lors de votre navigation. Aucune donnée
-            n’est stockée sur les serveurs. Néanmoins, GitHub Pages, en tant qu’hébergeur, peut collecter certaines
-            données de connexion (adresse IP, type de navigateur, etc.) conformément à sa politique de confidentialité
-            et aux lois en vigueur.
-        </p>
-    </section>
-
-    <section class="termsSection">
-        <h2>Hébergement</h2>
-        <p>Le site <strong>LOTY</strong> est hébergé par :</p>
-        <address>
-            <p>
-                <strong>Léo LESIMPLE (EI)</strong><br>
-                53 Rue Ledru-Rollin<br>
+                Léo Lesimple<br>
+                53, rue Ledru-Rollin<br>
                 78800 Houilles<br>
-                Mail : <a href="mailto:leo.lesimple@edu.univ-eiffel.fr">leo.lesimple@edu.univ-eiffel.fr</a><br>
+                France
             </p>
         </address>
+        <p>Directeur de la publication : Léo Lesimple.</p>
     </section>
-
     <section class="termsSection">
-        <h2>Rôles des membres</h2>
-
-        <div class="role">
-            <h3>Conception graphique</h3>
-            <ul>
-                <li><strong>Mélina Chassagnon</strong> — maquettage, conception des éléments visuels vectoriels, charte
-                    graphique et logo.
-                </li>
-                <li>
-                    <strong>
-                        Lana Kettou
-                    </strong> — conception des éléments visuels vectoriels, charte graphique et logo.
-                </li>
-            </ul>
-        </div>
-
-        <div class="role">
-            <h3>Développement web</h3>
-            <ul>
-                <li><strong>Léo Lesimple</strong> — développement back-end du site, gestion de la base de données LOTY.
-                </li>
-                <li><strong>Mélina Chassagnon</strong> — développement front-end du site.</li>
-            </ul>
-        </div>
+        <h2>Acheminement du trafic</h2>
+        <p>Le trafic du site transite par Cloudflare, Inc. (101 Townsend Street, San Francisco, CA 94107, États-Unis), qui assure la diffusion, la mise en cache et la protection du site. Cloudflare n'héberge pas le site.</p>
+    </section>
+    <section class="termsSection">
+        <h2>Contact</h2>
+        <p>Pour toute question, demande ou exercice du droit de réponse : <a href="mailto:leo@leolesimple.fr">leo@leolesimple.fr</a>.</p>
     </section>
     <section class="termsSection">
         <h2>Propriété intellectuelle</h2>
-        <p><strong>Sur nos contenus : </strong></p>
-        <p>
-            La charte graphique de <em>LOTY</em> ainsi que les visuels vectoriels sont entièrement conçus par nos soins
-            et
-            sont la propriété exclusive de <em>LOTY</em>. Toute reproduction, distribution, modification, adaptation,
-            retransmission ou publication
-            de ces différents éléments est strictement interdite sans l’accord exprès par écrit de
-            <em>LOTY</em>.
-        </p>
+        <p>LOTY est un projet étudiant réalisé dans le cadre du BUT MMI. Toute reproduction sans accord écrit préalable est interdite.</p>
+        <div class="role">
+            <h3>Conception graphique</h3>
+            <ul>
+                <li><strong>Mélina Chassagnon</strong> : maquettage, éléments visuels vectoriels, charte graphique et logo.</li>
+                <li><strong>Lana Kettou</strong> : éléments visuels vectoriels, charte graphique et logo.</li>
+            </ul>
+        </div>
+        <div class="role">
+            <h3>Développement web</h3>
+            <ul>
+                <li><strong>Léo Lesimple</strong> : développement back-end et base de données.</li>
+                <li><strong>Mélina Chassagnon</strong> : développement front-end.</li>
+            </ul>
+        </div>
+        <p>Polices : Fivo Sans, Shrimp et Saint Regus, hébergées avec le site. Animations : bibliothèque GSAP (GreenSock), sous sa licence standard, hébergée avec le site.</p>
+    </section>
+    <section class="termsSection">
+        <h2>Données personnelles</h2>
+        <p>Les traitements de données réalisés sur ce site sont décrits dans la <a href="/confidentialite">politique de confidentialité</a>.</p>
     </section>
 </main>
