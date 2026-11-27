@@ -85,7 +85,7 @@ global $conn;
         REJOINS LA COMMUNAUTÉ
     </a>
 </section>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+<script src="/assets/js/lib/gsap.min.js"></script>
 <script>
 
 </script>
