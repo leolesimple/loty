@@ -1,0 +1,3 @@
+# robots.txt de LOTY
+User-agent: *
+Disallow:
